@@ -17,7 +17,7 @@
 
                         <p class="mt-8 text-base text-black sm:text-xl">Lorem ipsum dolor sit amet consectetur
                             adipisicing elit. Ipsam dolorem a maxime vero necessitatibus ullam quos magni ipsum minus
-                            inventore at nam, excepturi dolores sint, amet ad quis, enim harum?</p>
+                            inventore at nam, excepturi dolores sint, amet ad quis, enim harum</p>
 
                         <div class="mt-10 sm:flex sm:items-center sm:space-x-8">
                             <a href="{{ route('movies.index') }}" title=""
