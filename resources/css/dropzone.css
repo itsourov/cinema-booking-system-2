@@ -1,0 +1,78 @@
+/*
+    All media uploader css will be there
+    @since 2.2
+*/
+
+
+.dropzone-form-wrapper form {
+    border: 2px dashed #ddd;
+    padding: 20px;
+    height: 488px;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.dark .dropzone-form-wrapper form {
+    border: 2px dashed #858585;
+
+    background-color: #1f2937;
+
+}
+
+.dark .dropzone .dz-preview.dz-image-preview {
+    background: #1f2937;
+}
+
+.dropzone-form-wrapper {
+    padding: 20px;
+}
+
+
+.dropzone-form-wrapper form span.xg-accept-files {
+    display: block;
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.dropzone-form-wrapper form span {
+    display: block;
+    font-size: 25px;
+    color: #fff;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+
+
+
+
+
+.dropzone .dz-preview.dz-error:hover .dz-error-message span {
+    font-size: 16px;
+    line-height: 26px;
+}
+
+
+.dropzone .dz-preview .dz-progress .dz-upload {
+    background: #333 !important;
+    height: 20px;
+}
+
+.dropzone .dz-preview .dz-details .dz-size span,
+.dropzone .dz-preview .dz-details .dz-filename span {
+    background-color: #151517;
+    border-radius: 3px;
+}
+
+.dropzone .dz-preview.dz-success .dz-success-mark svg path {
+    fill: #34a734;
+}
+
+.dropzone .dz-preview.dz-success .dz-error-mark svg path {
+    fill: #ec5d6b;
+}
