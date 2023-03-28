@@ -11,7 +11,7 @@
                 @foreach ($genres as $genre)
                     <x-card class="p-4">
                         <h2>{{ $genre->title }}</h2>
-                        <p>(@foreach ($genre->watchedItems as $item)
+                        <p>You chosed these movie from this genre(@foreach ($genre->watchedItems as $item)
                                 {{ $item->title }},
                             @endforeach
                             ) </p>
