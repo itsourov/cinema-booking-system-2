@@ -109,6 +109,6 @@ class FoodList extends Component
         $model->foods = $foods;
         $model->save();
 
-        // return redirect()->route('food-order.show', $model->id);
+        return redirect()->route('food-order.show', $model->id);
     }
 }
