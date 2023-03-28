@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Genre;
+use App\Models\Movie;
 use Spatie\Image\Manipulations;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
@@ -60,5 +62,14 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
             ->addMediaConversion('small')
             ->fit(Manipulations::FIT_CROP, 50, 50)
             ->nonQueued();
+    }
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class);
+    }
+    public function movies()
+    {
+        return $this->belongsToMany(Movie::class);
     }
 }

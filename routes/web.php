@@ -6,6 +6,7 @@ use App\Http\Controllers\ShowController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecomendationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,9 @@ Route::prefix('shows')->group(function () {
     Route::get('/', [ShowController::class, 'index'])->name('shows.index');
     Route::get('/{show}', [ShowController::class, 'show'])->name('shows.show');
 });
+
+
+Route::get('/my-recomendation', [RecomendationController::class, 'index'])->middleware('auth')->name('recomendation');
 
 Route::get('/reset', function () {
     Artisan::call('migrate:fresh', ['--seed' => ' ']);

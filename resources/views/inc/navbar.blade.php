@@ -91,6 +91,9 @@
                 <x-nav-link :href="route('movies.index')" :active="request()->routeIs('movies.index')">
                     {{ __('Movies') }}
                 </x-nav-link>
+                <x-nav-link :href="route('recomendation')" :active="request()->routeIs('recomendation')">
+                    {{ __('Recomendation') }}
+                </x-nav-link>
                 <x-nav-link :href="route('shows.index')" :active="request()->routeIs('shows.index')">
                     {{ __('Upcoming Show') }}
                 </x-nav-link>
