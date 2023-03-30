@@ -1,36 +1,29 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!doctype html>
+<html>
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>ItSourov</title>
-
-
-
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/video.js'])
-    @livewireStyles
-
-
-    <script>
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
-                '(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-    </script>
+    <title>videojs-vr Demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.4.1/dist/video-js.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/videojs-vr@1.5.0/dist/videojs-vr.css">xd
 </head>
 
-<body class="bg-white text-gray-900 dark:text-white dark:bg-gray-900 antialiased">
-
-    <video width="640" height="300" id="videojs-vr-player" class="video-js vjs-default-skin" controls playsinline>
-        <source src="https://videojs-vr.netlify.app/samples/eagle-360.mp4" type="video/mp4">
+<body>
+    <video width="640" height="300" id="videojs-vr-player" class="video-js vjs-default-skin" controls playsinline
+        crossorigin="anonymous">
+        <source src="{{ asset('images/file_example_MP4_640_3MG.mp4') }}" type="video/mp4" crossorigin="anonymous">
     </video>
-
-    <script type="module">
+    <ul>
+        <li><a href="test/debug.html">Run unit tests in browser.</a></li>
+        <li><a href="examples/cube.html">Cube Video example</a></li>
+        <li><a href="examples/fluid.html">"Fluid" video size example</a></li>
+        <li><a href="examples/iframe.html">Iframe example</a></li>
+    </ul>
+    <script src="https://cdn.jsdelivr.net/npm/video.js@7.4.1/dist/video.js"
+        integrity="sha256-vrHnet1gn0rfMfcNSTaMvp7bW1MU+hBXCuyPjfdxXhc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-vr@1.5.0/dist/videojs-vr.js"
+        integrity="sha256-aVLbKVeaTsLwmKYjya1a4xZGhAaG7j3Z4Ll7SkzSa6A=" crossorigin="anonymous"></script>
+    <script>
         (function(window, videojs) {
             var player = window.player = videojs('videojs-vr-player');
             player.mediainfo = player.mediainfo || {};
@@ -44,9 +37,6 @@
             });
         }(window, window.videojs));
     </script>
-    @include('inc.message')
-    @livewireScripts
-    @yield('scripts')
 </body>
 
 </html>
