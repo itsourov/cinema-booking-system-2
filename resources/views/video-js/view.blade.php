@@ -1,22 +1,52 @@
-<head>
-    <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-    <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>ItSourov</title>
+
+
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/video.js'])
+    @livewireStyles
+
+
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
 </head>
 
-<body>
-    <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="MY_VIDEO_POSTER.jpg"
-        data-setup="{}">
-        <source src="https://file-examples.com/storage/feb401d325641db2fa1dfe7/2017/04/file_example_MP4_640_3MG.mp4"
-            type="video/mp4" />
+<body class="bg-white text-gray-900 dark:text-white dark:bg-gray-900 antialiased">
 
-        <p class="vjs-no-js">
-            To view this video please enable JavaScript, and consider upgrading to a
-            web browser that
-            <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-        </p>
+    <video width="640" height="300" id="videojs-vr-player" class="video-js vjs-default-skin" controls playsinline>
+        <source src="https://videojs-vr.netlify.app/samples/eagle-360.mp4" type="video/mp4">
     </video>
 
-    <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+    <script type="module">
+        (function(window, videojs) {
+            var player = window.player = videojs('videojs-vr-player');
+            player.mediainfo = player.mediainfo || {};
+            player.mediainfo.projection = '360';
+
+            // AUTO is the default and looks at mediainfo
+            var vr = window.vr = player.vr({
+                projection: 'AUTO',
+                debug: true,
+                forceCardboard: false
+            });
+        }(window, window.videojs));
+    </script>
+    @include('inc.message')
+    @livewireScripts
+    @yield('scripts')
 </body>
+
+</html>
