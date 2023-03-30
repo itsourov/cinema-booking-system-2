@@ -53,6 +53,8 @@
             });
         }(window, window.videojs));
     </script>
+    <h3>You can watch it in vr using a mobile or VR compatible device. or you can wathc it like a normal video on
+        desktop devices.</h3>
 </body>
 
 </html>

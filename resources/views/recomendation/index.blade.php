@@ -32,4 +32,10 @@
         @endif
 
     </div>
+
+    <style>
+        .usc {
+            display: none;
+        }
+    </style>
 </x-app-layout>
