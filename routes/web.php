@@ -7,6 +7,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecomendationController;
+use App\Http\Controllers\VideoJsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Route::prefix('shows')->group(function () {
 
 
 Route::get('/my-recomendation', [RecomendationController::class, 'index'])->middleware('auth')->name('recomendation');
+Route::get('/video-js', [VideoJsController::class, 'view'])->middleware('auth')->name('videojs.view');
 
 Route::get('/reset', function () {
     Artisan::call('migrate:fresh', ['--seed' => ' ']);
