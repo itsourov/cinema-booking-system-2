@@ -17,7 +17,7 @@
 
         #videojs-vr-player {
             width: 100% !important;
-            height: 100% !important;
+            height: 90% !important;
             overflow: hidden;
             background-color: #fff
         }

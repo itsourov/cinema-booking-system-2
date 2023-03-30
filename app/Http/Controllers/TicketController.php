@@ -183,6 +183,11 @@ class TicketController extends Controller
     }
     public function vr_show(Ticket $ticket)
     {
-        return $ticket;
+        if ($ticket->type != 'virtual') {
+            return back()->with('message', 'Permission denied');
+        }
+        return view('tickets.vr-show', [
+            'ticket' => $ticket,
+        ]);
     }
 }
