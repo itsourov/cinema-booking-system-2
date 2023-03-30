@@ -19,7 +19,9 @@
                 <p class="text-center">Payment status: <span class=" font-bold">{{ $ticket->payment_status }}</span>
                 <p class="text-center">Seat number: <span
                         class=" font-bold">{{ json_encode($ticket->seat_number) }}</span>
-                <p class="text-center">Ticket Price: <span class=" font-bold">{{ $price }}</span>
+                <p class="text-center">Ticket QTY: <span class=" font-bold">{{ $ticket->qty }}</span>
+                <p class="text-center">Ticket Price: <span
+                        class=" font-bold">{{ $ticket->payment_status == 'paid' ? $ticket->paid_amount : $price }}</span>
             </div>
             <div class="text-center mt-5">
                 @if ($ticket->payment_status != 'paid')

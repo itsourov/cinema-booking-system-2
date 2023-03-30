@@ -47,11 +47,16 @@ class TicketController extends Controller
     public function show(Ticket $ticket)
     {
         $price = 0;
-        foreach ($ticket->seat_number as $key => $seat) {
-            $row = substr($seat, 0, 1);
-            $col = substr($seat, 1, 2);
-            $price += json_decode(Show::where('id', $ticket->show->id)->first()->seat)->$row->$col->price;
+        if ($ticket->type == 'virtual') {
+            $price = $ticket->show->virtual_ticket_price * $ticket->qty;
+        } else {
+            foreach ($ticket->seat_number as $key => $seat) {
+                $row = substr($seat, 0, 1);
+                $col = substr($seat, 1, 2);
+                $price += json_decode(Show::where('id', $ticket->show->id)->first()->seat)->$row->$col->price;
+            }
         }
+
 
 
         $dateTime =  Carbon::now()->toDateTimeString();
@@ -79,37 +84,42 @@ class TicketController extends Controller
 
 
         $price = 0;
-        foreach ($ticket->seat_number as $key => $seat) {
-            $row = substr($seat, 0, 1);
-            $col = substr($seat, 1, 2);
-            $price += json_decode(Show::where('id', $ticket->show->id)->first()->seat)->$row->$col->price;
+        if ($ticket->type == 'virtual') {
+            $price = $ticket->show->virtual_ticket_price * $ticket->qty;
+        } else {
+            foreach ($ticket->seat_number as $key => $seat) {
+                $row = substr($seat, 0, 1);
+                $col = substr($seat, 1, 2);
+                $price += json_decode(Show::where('id', $ticket->show->id)->first()->seat)->$row->$col->price;
+            }
         }
-
 
         if ($request->payment_status == 'paid') {
 
 
+            if ($ticket->type != 'virtual') {
 
-            foreach ($ticket->seat_number as $key => $seat) {
-                $row = substr($seat, 0, 1);
-                $col = substr($seat, 1, 2);
+                foreach ($ticket->seat_number as $key => $seat) {
+                    $row = substr($seat, 0, 1);
+                    $col = substr($seat, 1, 2);
 
-                $json =   json_decode(Show::where('id', $ticket->show->id)->first()->seat);
+                    $json =   json_decode(Show::where('id', $ticket->show->id)->first()->seat);
 
-                if ($json->$row->$col->status != 'available') {
-                    DB::rollBack();
-                    return back()->with('message', 'Ticket ' . $row . $col . ' is no longer available to book');
+                    if ($json->$row->$col->status != 'available') {
+                        DB::rollBack();
+                        return back()->with('message', 'Ticket ' . $row . $col . ' is no longer available to book');
+                    }
+
+                    $json->$row->$col->status = "booked";
+                    $json->$row->$col->user_id = auth()->user()->id;
+
+
+
+                    Show::where('id', $ticket->show->id)->first()->update([
+                        'seat' => json_encode($json),
+
+                    ]);
                 }
-
-                $json->$row->$col->status = "booked";
-                $json->$row->$col->user_id = auth()->user()->id;
-
-
-
-                Show::where('id', $ticket->show->id)->first()->update([
-                    'seat' => json_encode($json),
-
-                ]);
             }
 
             $ticket->update([
@@ -120,28 +130,29 @@ class TicketController extends Controller
             DB::commit();
             return back()->with('message', 'Ticket Payment Done');
         } else {
-            foreach ($ticket->seat_number as $key => $seat) {
-                $row = substr($seat, 0, 1);
-                $col = substr($seat, 1, 2);
+            if ($ticket->type != 'virtual') {
+                foreach ($ticket->seat_number as $key => $seat) {
+                    $row = substr($seat, 0, 1);
+                    $col = substr($seat, 1, 2);
 
-                $json =   json_decode(Show::where('id', $ticket->show->id)->first()->seat);
+                    $json =   json_decode(Show::where('id', $ticket->show->id)->first()->seat);
 
 
 
-                if ($json->$row->$col->status != 'booked' || $json->$row->$col->user_id != auth()->user()->id) {
-                    DB::rollBack();
-                    return back()->with('message', 'Ticket ' . $row . $col . ' is invalid');
+                    if ($json->$row->$col->status != 'booked' || $json->$row->$col->user_id != auth()->user()->id) {
+                        DB::rollBack();
+                        return back()->with('message', 'Ticket ' . $row . $col . ' is invalid');
+                    }
+                    $json->$row->$col->status = "available";
+                    $json->$row->$col->user_id = '';
+
+
+                    Show::where('id', $ticket->show->id)->first()->update([
+                        'seat' => json_encode($json),
+
+                    ]);
                 }
-                $json->$row->$col->status = "available";
-                $json->$row->$col->user_id = '';
-
-
-                Show::where('id', $ticket->show->id)->first()->update([
-                    'seat' => json_encode($json),
-
-                ]);
             }
-
             $ticket->update([
                 'paid_amount' => null,
                 'payment_time' => null,

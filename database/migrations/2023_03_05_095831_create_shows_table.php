@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->dateTime('date');
             $table->json('seat');
+            $table->float('virtual_ticket_price');
 
             $table->timestamps();
         });

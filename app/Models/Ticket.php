@@ -15,6 +15,8 @@ class Ticket extends Model
         'show_id',
         'paid_amount',
         'payment_time',
+        'type',
+        'qty',
 
 
     ];

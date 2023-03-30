@@ -10,12 +10,12 @@ class RecomendationController extends Controller
     public function index()
     {
 
-        $genres = auth()->user()->genres->loadMissing(['movies.genres' => function ($query1) {
+        $genres = auth()->user()->genres->loadMissing(['movies' => function ($query1) {
             $query1->whereNot(function ($query) {
                 $query->whereHas('users', function ($q) {
                     $q->where('user_id', auth()->user()->id);
                 });
-            });
+            })->with('genres');
         }, 'watchedItems',]);
 
         // return $genres;

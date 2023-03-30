@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('show_id')->constrained();
             $table->json('seat_number');
+            $table->integer('qty');
+            $table->string('type')->default('physical');
             $table->string('payment_status')->default('unpaid');
             $table->string('paid_amount')->nullable();
             $table->dateTime('payment_time')->nullable();
