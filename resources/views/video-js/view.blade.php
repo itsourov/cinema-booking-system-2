@@ -11,7 +11,7 @@
 <body>
     <video width="640" height="300" id="videojs-vr-player" class="video-js vjs-default-skin" controls playsinline
         crossorigin="anonymous">
-        <source src="{{ asset('images/file_example_MP4_640_3MG.mp4') }}" type="video/mp4" crossorigin="anonymous">
+        <source src="{{ asset('images/eagle-360.mp4') }}" type="video/mp4" crossorigin="anonymous">
     </video>
     <ul>
         <li><a href="test/debug.html">Run unit tests in browser.</a></li>
