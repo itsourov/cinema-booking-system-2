@@ -181,4 +181,8 @@ class TicketController extends Controller
         ]);
         return $pdf->stream();
     }
+    public function vr_show(Ticket $ticket)
+    {
+        return $ticket;
+    }
 }

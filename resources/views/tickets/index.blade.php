@@ -46,14 +46,21 @@
                             </form>
 
 
-                            <form action="{{ route('ticket.download', $ticket->id) }}" method="GET" class="inline">
+                            @if ($ticket->type == 'virtual')
+                                <a href="{{ route('ticket.vr-show', $ticket->id) }}" class="inline">
+                                    <x-primary-button>View in VR</x-primary-button>
+                                </a>
+                            @else
+                                <form action="{{ route('ticket.download', $ticket->id) }}" method="GET"
+                                    class="inline">
 
-                                @csrf
+                                    @csrf
 
-                                <x-primary-button>Download Ticket
+                                    <x-primary-button>Download Ticket
 
-                                </x-primary-button>
-                            </form>
+                                    </x-primary-button>
+                                </form>
+                            @endif
                         @endif
 
 

@@ -46,12 +46,18 @@
                     </form>
 
                     <div class="flex justify-center">
-                        <a href="{{ route('ticket.download', $ticket->id) }}">
-                            <x-primary-button class="flex  items-center space-x-2">
-                                <span>Download Ticket</span>
-                                <x-ri-download-2-fill />
-                            </x-primary-button>
-                        </a>
+                        @if ($ticket->type == 'virtual')
+                            <a href="{{ route('ticket.vr-show', $ticket->id) }}" class="inline">
+                                <x-primary-button>View in VR</x-primary-button>
+                            </a>
+                        @else
+                            <a href="{{ route('ticket.download', $ticket->id) }}">
+                                <x-primary-button class="flex  items-center space-x-2">
+                                    <span>Download Ticket</span>
+                                    <x-ri-download-2-fill />
+                                </x-primary-button>
+                            </a>
+                        @endif
 
                     </div>
                 @endif

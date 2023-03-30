@@ -9,4 +9,5 @@ Route::prefix('ticket')->middleware(['auth'])->group(function () {
     Route::put('/{ticket}', [TicketController::class, 'update'])->name('ticket.update');
     Route::delete('/{ticket}', [TicketController::class, 'destroy'])->name('ticket.delete');
     Route::get('/{ticket}/download', [TicketController::class, 'download'])->name('ticket.download');
+    Route::get('/{ticket}/vr-show', [TicketController::class, 'vr_show'])->name('ticket.vr-show');
 });
