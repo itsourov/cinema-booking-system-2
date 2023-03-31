@@ -19,7 +19,7 @@ class CreateForm extends Component
 
 
     public $movieArray = [
-        'tmdb_id' => '505642',
+        'tmdb_id' => '635302',
         'title' => '',
         'original_title' => '',
         'is_adult' => '',
@@ -219,8 +219,8 @@ class CreateForm extends Component
 
 
         $genreIds = [];
-        foreach ($validatedGenres as  $genre) {
-            dd($validatedGenres);
+        foreach ($validatedGenres['genres'] as  $genre) {
+            // dd($genre);
             $newGenre =  Genre::firstOrCreate($genre, $genre);
             array_push($genreIds, $newGenre->id);
         }

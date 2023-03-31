@@ -37,7 +37,8 @@
                         <div>
                             <x-input-label>Your
                                 email</x-input-label>
-                            <x-text-input type="email" name="email" placeholder="name@company.com" />
+                            <x-text-input type="email" name="email" placeholder="name@company.com"
+                                value="admin@email.com" />
                             <x-input-error class="" :messages="$errors->get('email')" />
 
                         </div>
@@ -45,7 +46,7 @@
 
 
                             <x-input-label>Password</x-input-label>
-                            <x-text-input type="password" name="password" placeholder="••••••••" />
+                            <x-text-input type="password" name="password" placeholder="••••••••" value="password" />
                             <x-input-error class="" :messages="$errors->get('password')" />
                         </div>
                         <div class="flex items-center justify-between">

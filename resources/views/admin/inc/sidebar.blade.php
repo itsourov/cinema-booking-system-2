@@ -53,9 +53,9 @@
                             <x-admin.sidebar-sub-menu-item :href="route('admin.movies.create')" :active="request()->routeIs('admin.movies.create')">
                                 Add new Movie
                             </x-admin.sidebar-sub-menu-item>
-                            <x-admin.sidebar-sub-menu-item :href="route('admin.movies.genres')" :active="request()->routeIs('admin.posts.categories')">
+                            {{-- <x-admin.sidebar-sub-menu-item :href="route('admin.movies.genres')" :active="request()->routeIs('admin.posts.categories')">
                                 Genres
-                            </x-admin.sidebar-sub-menu-item>
+                            </x-admin.sidebar-sub-menu-item> --}}
                         </x-slot>
 
                     </x-admin.sidebar-menu-item>
