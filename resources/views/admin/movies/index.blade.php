@@ -70,13 +70,13 @@
                                     <p>release date: {{ $movie->release_date }}</p>
 
                                     <div class="mt-6 flex justify-end">
-                                        <x-secondary-button x-on:click="$dispatch('close')">
+                                        <x-button.secondary x-on:click="$dispatch('close')">
                                             {{ __('Cancel') }}
-                                        </x-secondary-button>
+                                        </x-button.secondary>
 
-                                        <x-danger-button class="ml-3">
+                                        <x-button.danger class="ml-3">
                                             {{ __('Delete Movie') }}
-                                        </x-danger-button>
+                                        </x-button.danger>
                                     </div>
                                 </form>
                             </x-modal>

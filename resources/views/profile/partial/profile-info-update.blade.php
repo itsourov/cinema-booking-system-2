@@ -24,8 +24,8 @@
         </a>
     </div>
 
-    <x-secondary-button x-on:click="showProfileImageUploader = !showProfileImageUploader">{{ __('Change Picture') }}
-    </x-secondary-button>
+    <x-button.secondary x-on:click="showProfileImageUploader = !showProfileImageUploader">{{ __('Change Picture') }}
+    </x-button.secondary>
     <form method="post" action="{{ route('profile.update') }}" class="mt-2 space-y-6">
         @csrf
         @method('patch')

@@ -8,9 +8,9 @@
               <h2 class="font-bold text-lg">{{ $movie->title }}</h2>
           </a>
           <p>release date: {{ $movie->release_date }}</p>
-          <x-secondary-button data-trailer="{{ $movie->trailer_link }}" x-data=""
+          <x-button.secondary data-trailer="{{ $movie->trailer_link }}" x-data=""
               x-on:click.prevent="openModal(event), $dispatch('open-modal', 'trailer_preview')">Preview
-              Trailer</x-secondary-button>
+              Trailer</x-button.secondary>
 
           <div class="tags">
               @foreach ($movie->genres as $genre)

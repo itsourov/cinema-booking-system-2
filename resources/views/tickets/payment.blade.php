@@ -35,14 +35,14 @@
                         @method('DELETE')
                         @csrf
 
-                        <x-danger-button>Delete Ticket</x-danger-button>
+                        <x-button.danger>Delete Ticket</x-button.danger>
                     </form>
                 @else
                     <form action="{{ route('ticket.update', $ticket->id) }}" method="post">
                         @method('PUT')
                         @csrf
                         <input type="hidden" name="payment_status" value="unpaid">
-                        <x-danger-button>Request Refund</x-danger-button>
+                        <x-button.danger>Request Refund</x-button.danger>
                     </form>
 
                     <div class="flex justify-center">

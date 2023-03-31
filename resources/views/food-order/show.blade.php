@@ -45,35 +45,25 @@
 
             <div class="text-center mt-5">
                 @if ($order->payment_status != 'paid')
-                    <form action="{{ route('ticket.update', $order->id) }}" method="post">
+                    <form action="{{ route('food-order.update', $order->id) }}" method="post">
                         @method('PUT')
                         @csrf
                         <input type="hidden" name="payment_status" value="paid">
                         <x-button.primary>Make Payment</x-button.primary>
                     </form>
-                    <form action="{{ route('ticket.delete', $order->id) }}" method="post">
+                    <form action="{{ route('food-order.delete', $order->id) }}" method="post">
                         @method('DELETE')
                         @csrf
 
-                        <x-danger-button>Delete Ticket</x-danger-button>
+                        <x-button.danger>Delete Order</x-button.danger>
                     </form>
                 @else
-                    <form action="{{ route('ticket.update', $order->id) }}" method="post">
+                    <form action="{{ route('food-order.update', $order->id) }}" method="post">
                         @method('PUT')
                         @csrf
                         <input type="hidden" name="payment_status" value="unpaid">
-                        <x-danger-button>Request Refund</x-danger-button>
+                        <x-button.danger>Request Refund</x-button.danger>
                     </form>
-
-                    <div class="flex justify-center">
-                        <a href="{{ route('ticket.download', $order->id) }}">
-                            <x-button.primary class="flex  items-center space-x-2">
-                                <span>Download Ticket</span>
-                                <x-ri-download-2-fill />
-                            </x-button.primary>
-                        </a>
-
-                    </div>
                 @endif
 
 

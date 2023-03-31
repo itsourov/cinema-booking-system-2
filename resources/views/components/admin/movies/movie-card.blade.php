@@ -6,9 +6,9 @@
       <div class="p-2 ">
           <h2 class="font-bold text-lg">{{ $movie->title }}</h2>
           <p>release date: {{ $movie->release_date }}</p>
-          <x-secondary-button data-trailer="{{ $movie->trailer_link }}" x-data=""
+          <x-button.secondary data-trailer="{{ $movie->trailer_link }}" x-data=""
               x-on:click.prevent="openModal(event), $dispatch('open-modal', 'trailer_preview')">Preview
-              Trailer</x-secondary-button>
+              Trailer</x-button.secondary>
           <div class="flex gap-2 mt-2">
               <a href="{{ route('admin.movies.edit', $movie->id) }}"
                   class="bg-green-200 dark:bg-green-800 rounded px-2 py-1">
@@ -41,13 +41,13 @@
                       <p>release date: {{ $movie->release_date }}</p>
 
                       <div class="mt-6 flex justify-end">
-                          <x-secondary-button x-on:click="$dispatch('close')">
+                          <x-button.secondary x-on:click="$dispatch('close')">
                               {{ __('Cancel') }}
-                          </x-secondary-button>
+                          </x-button.secondary>
 
-                          <x-danger-button class="ml-3">
+                          <x-button.danger class="ml-3">
                               {{ __('Delete Movie') }}
-                          </x-danger-button>
+                          </x-button.danger>
                       </div>
                   </form>
               </x-modal>

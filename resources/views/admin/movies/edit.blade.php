@@ -33,9 +33,9 @@
                     <div class="flex items-center">
                         <x-text-input id="select_poster_input" placeholder="poster_link" name="poster_link"
                             type="text" :value="old('poster_link', $movie->poster_link)" />
-                        <x-secondary-button class="mb-0 " id="select_poster_button" data-input="select_poster_input"
+                        <x-button.secondary class="mb-0 " id="select_poster_button" data-input="select_poster_input"
                             data-preview="select_poster_preview">
-                            Chose</x-secondary-button>
+                            Chose</x-button.secondary>
                     </div>
                     <x-input-error class="mt-2" :messages="$errors->get('poster_link')" />
 

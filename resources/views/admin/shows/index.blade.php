@@ -13,9 +13,9 @@
                     <p class="cd_show inline" data-now="{{ $dateTime }}" data-show_time="{{ $show->date }}">
                         calculating...
                     </p>
-                    <x-secondary-button data-trailer="{{ $show->movie->trailer_link }}" x-data=""
+                    <x-button.secondary data-trailer="{{ $show->movie->trailer_link }}" x-data=""
                         x-on:click.prevent="openModal(event), $dispatch('open-modal', 'trailer_preview')">Preview
-                        Trailer</x-secondary-button>
+                        Trailer</x-button.secondary>
                     <div class="flex gap-2 mt-2">
                         <a href="{{ route('admin.shows.edit', $show->id) }}"
                             class="bg-green-200 dark:bg-green-800 rounded px-2 py-1">
@@ -52,13 +52,13 @@
                                     calculating...
                                 </p>
                                 <div class="mt-6 flex justify-end">
-                                    <x-secondary-button x-on:click="$dispatch('close')">
+                                    <x-button.secondary x-on:click="$dispatch('close')">
                                         {{ __('Cancel') }}
-                                    </x-secondary-button>
+                                    </x-button.secondary>
 
-                                    <x-danger-button class="ml-3">
+                                    <x-button.danger class="ml-3">
                                         {{ __('Delete Show') }}
-                                    </x-danger-button>
+                                    </x-button.danger>
                                 </div>
                             </form>
                         </x-modal>
