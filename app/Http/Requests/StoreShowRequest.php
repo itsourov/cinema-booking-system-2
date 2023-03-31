@@ -25,6 +25,7 @@ class StoreShowRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'date' => ['required', 'date', 'after:30 min'],
             'ticket_price' => ['required', 'numeric'],
+            'virtual_ticket_price' => ['required', 'numeric'],
         ];
     }
 }

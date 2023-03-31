@@ -17,6 +17,7 @@ class Show extends Model
         'movie_id',
         'date',
         'seat',
+        'virtual_ticket_price',
 
     ];
 

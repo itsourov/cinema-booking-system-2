@@ -82,7 +82,7 @@
                             </x-modal>
                         </div>
                         <div class="flex m-2">
-                            <a href=""
+                            <a href="{{ route('admin.shows.create', $movie->id) }}"
                                 class="w-full rounded bg-primary-500 px-3 py-1 text-white text-center">Make a new
                                 show</a>
                         </div>
@@ -98,48 +98,6 @@
 
 
 
-    <x-modal name="trailer_preview">
-        <div class="container">
-            <iframe id="videoLink" frameborder="0" allowfullscreen class="video"></iframe>
-        </div>
-    </x-modal>
-    <style>
-        .container {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%;
-        }
-
-        .video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-
-    <script>
-        function openModal(el) {
-
-            // alert('asd')
-
-            var iframe = document.getElementById('videoLink')
-            var src = el.target.getAttribute('data-trailer')
-            iframe.setAttribute('src', 'https://www.youtube.com/embed/' + getId(src))
-
-        }
-
-        function getId(url) {
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-            const match = url.match(regExp);
-
-            return (match && match[2].length === 11) ?
-                match[2] :
-                null;
-        }
-    </script>
 
 
 </x-admin-layout>
