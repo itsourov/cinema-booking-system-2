@@ -30,6 +30,7 @@ class Movie extends Model
         'cast',
         'crew',
         'synopsis',
+        'certification',
     ];
 
     protected $casts = [

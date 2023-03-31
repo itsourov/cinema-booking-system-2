@@ -27,6 +27,7 @@ return new class extends Migration
             $table->json('trailers')->nullable();
             $table->json('cast')->nullable();
             $table->json('crew')->nullable();
+            $table->string('certification')->default('unrated');
             $table->timestamps();
         });
     }

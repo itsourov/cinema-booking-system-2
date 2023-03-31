@@ -13,7 +13,7 @@
                 <h2 class=" text-3xl font-bold" style="font-family: 'Lora', serif;">{{ $movie->title }}</h2>
                 <div class="flex items-center gap-3">
                     <div class="bg-gray-100 dark:bg-gray-800 text-sm  p-1 rounded">
-                        PG 18
+                        {{ $movie->certification }}
                     </div>
                     <p class="text-sm text-gray-500">{{ date('M. d, Y', strtotime($movie->release_date)) }}</p>
 

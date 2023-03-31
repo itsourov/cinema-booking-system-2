@@ -32,6 +32,12 @@
                     <x-input.error :messages="$errors->get('movieArray.synopsis')" />
                 </div>
                 <div>
+                    <x-input.label value="{{ __('certification') }}" />
+                    <x-input.text type="text" wire:model.lazy="movieArray.certification"
+                        placeholder="Enter info here" />
+                    <x-input.error :messages="$errors->get('movieArray.certification')" />
+                </div>
+                <div>
                     <x-input.label value="{{ __('is_adult') }}" />
                     <input type="checkbox" wire:model.lazy="movieArray.is_adult" placeholder="Enter info here" />
                     <x-input.error :messages="$errors->get('movieArray.is_adult')" />

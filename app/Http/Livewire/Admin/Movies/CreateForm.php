@@ -33,6 +33,7 @@ class CreateForm extends Component
         'cast' => [],
         'crew' => [],
         'synopsis' => '',
+        'certification' => 'unrated',
     ];
 
     public $genres = [];
@@ -54,6 +55,7 @@ class CreateForm extends Component
         'movieArray.synopsis' =>  '',
         'movieArray.rating' =>  '',
         'movieArray.runtime' =>  '',
+        'movieArray.certification' =>  '',
     ];
 
     public function render()
@@ -131,7 +133,7 @@ class CreateForm extends Component
         $movieid = $this->movieArray['tmdb_id'];
         $movieJson = cache()->remember($movieid, 60 * 60, function () use ($movieid) {
 
-            $movieRes = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $movieid);
+            $movieRes = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $movieid . '?append_to_response=release_dates');
             if (!$movieRes->successful()) {
                 return false;
             }
@@ -161,7 +163,12 @@ class CreateForm extends Component
         // dd($movie);
 
 
-
+        $certification = 'Unrated';
+        foreach ($movie->release_dates->results as $cReleases) {
+            if ($cReleases->iso_3166_1 == 'US') {
+                $certification = $cReleases->release_dates[0]->certification;
+            }
+        }
 
         $this->movieArray =    [
             'tmdb_id' => $movie->id,
@@ -178,6 +185,7 @@ class CreateForm extends Component
             'cast' => ($movie->credits->cast),
             'crew' => ($movie->credits->crew),
             'synopsis' => ($movie->overview),
+            'certification' => $certification,
         ];
 
         $this->genres = [];
