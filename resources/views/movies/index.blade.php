@@ -1,5 +1,8 @@
 <x-app-layout>
     <div class="container mx-auto px-2 mt-5 space-y-4">
+        @if ($movies->isEmpty())
+            <x-seed-button />
+        @endif
         <h2 class=" text-base font-bold">Latest movies</h2>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-2 gap-y-6">
