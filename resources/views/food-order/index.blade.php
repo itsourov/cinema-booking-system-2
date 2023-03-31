@@ -49,7 +49,7 @@
                                 @method('PUT')
                                 @csrf
                                 <input type="hidden" name="payment_status" value="paid">
-                                <x-primary-button>Make Payment</x-primary-button>
+                                <x-button.primary>Make Payment</x-button.primary>
                             </form>
                             <form action="{{ route('food-order.delete', $order->id) }}" method="post" class="inline">
                                 @method('DELETE')

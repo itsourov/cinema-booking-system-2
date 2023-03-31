@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             @for ($i = 0; $i < $ticket->qty; $i++)
                 <a href="{{ route('videojs.view', $ticket->id) }}">
-                    <x-primary-button>Virtual seat #{{ $i + 1 }}</x-primary-button>
+                    <x-button.primary>Virtual seat #{{ $i + 1 }}</x-button.primary>
                 </a>
             @endfor
         </div>

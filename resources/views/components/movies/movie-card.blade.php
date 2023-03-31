@@ -24,7 +24,7 @@
           @if ($details)
           @else
               <a href="{{ route('movies.show', $movie->id) }}">
-                  <x-primary-button class=" mt-2">View details</x-primary-button>
+                  <x-button.primary class=" mt-2">View details</x-button.primary>
               </a>
           @endif
 

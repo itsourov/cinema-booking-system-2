@@ -63,7 +63,7 @@
                                 class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot
                                 password?</a>
                         </div>
-                        <x-primary-button class="w-full ">Sign in</x-primary-button>
+                        <x-button.primary class="w-full ">Sign in</x-button.primary>
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                             Don’t have an account yet? <a href="/register"
                                 class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>

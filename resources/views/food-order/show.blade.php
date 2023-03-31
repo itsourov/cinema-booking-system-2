@@ -49,7 +49,7 @@
                         @method('PUT')
                         @csrf
                         <input type="hidden" name="payment_status" value="paid">
-                        <x-primary-button>Make Payment</x-primary-button>
+                        <x-button.primary>Make Payment</x-button.primary>
                     </form>
                     <form action="{{ route('ticket.delete', $order->id) }}" method="post">
                         @method('DELETE')
@@ -67,10 +67,10 @@
 
                     <div class="flex justify-center">
                         <a href="{{ route('ticket.download', $order->id) }}">
-                            <x-primary-button class="flex  items-center space-x-2">
+                            <x-button.primary class="flex  items-center space-x-2">
                                 <span>Download Ticket</span>
                                 <x-ri-download-2-fill />
-                            </x-primary-button>
+                            </x-button.primary>
                         </a>
 
                     </div>

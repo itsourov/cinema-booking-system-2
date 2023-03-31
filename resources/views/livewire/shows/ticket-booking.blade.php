@@ -58,8 +58,8 @@
     @if ($seats)
         <footer class="mt-20 bg-white dark:bg-gray-700 sticky bottom-0" style="box-shadow: 0 0 10px 0 rgba(0,0,0,.5);">
             <div class=" text-center py-2">
-                <x-primary-button class="px-10" style="margin-bottom: 0px" wire:click="makeTicket">Pay
-                    {{ $price }}</x-primary-button>
+                <x-button.primary class="px-10" style="margin-bottom: 0px" wire:click="makeTicket">Pay
+                    {{ $price }}</x-button.primary>
             </div>
             @if (session()->has('message'))
                 <div class="alert alert-success text-center">
@@ -71,8 +71,8 @@
     @if ($seatType == 'virtual')
         <footer class="mt-20 bg-white dark:bg-gray-700 sticky bottom-0" style="box-shadow: 0 0 10px 0 rgba(0,0,0,.5);">
             <div class=" text-center py-2">
-                <x-primary-button class="px-10" style="margin-bottom: 0px" wire:click="makeVirtualTicket">Pay
-                    {{ $price }}</x-primary-button>
+                <x-button.primary class="px-10" style="margin-bottom: 0px" wire:click="makeVirtualTicket">Pay
+                    {{ $price }}</x-button.primary>
             </div>
             @if (session()->has('message'))
                 <div class="alert alert-success text-center">

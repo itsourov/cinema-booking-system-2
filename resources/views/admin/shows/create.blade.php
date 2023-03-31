@@ -30,9 +30,9 @@
 
 
 
-                <x-primary-button>
+                <x-button.primary>
                     Submit
-                </x-primary-button>
+                </x-button.primary>
             </form>
         </x-card>
     </div>

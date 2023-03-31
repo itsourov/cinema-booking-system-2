@@ -13,6 +13,8 @@ class Controller extends BaseController
 
     public function test()
     {
+
+        return view('test');
         $response = cache()->remember('popular-moviessad', 60 * 60, function () {
 
             $response = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/popular');

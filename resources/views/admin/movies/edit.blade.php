@@ -94,9 +94,9 @@
                     <x-input-error class="mt-2" :messages="$errors->get('genres')" />
                 </div>
 
-                <x-primary-button>
+                <x-button.primary>
                     Submit
-                </x-primary-button>
+                </x-button.primary>
             </form>
         </x-card>
     </div>

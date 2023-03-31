@@ -53,7 +53,7 @@
               </x-modal>
           </div>
           <a href="{{ route('admin.shows.create', $movie->id) }}">
-              <x-primary-button class="mt-4">Make a new show</x-primary-button>
+              <x-button.primary class="mt-4">Make a new show</x-button.primary>
           </a>
           @foreach ($movie->genres as $genre)
               <span

@@ -29,7 +29,7 @@
                                 @method('PUT')
                                 @csrf
                                 <input type="hidden" name="payment_status" value="paid">
-                                <x-primary-button>Make Payment</x-primary-button>
+                                <x-button.primary>Make Payment</x-button.primary>
                             </form>
                             <form action="{{ route('ticket.delete', $ticket->id) }}" method="post" class="inline">
                                 @method('DELETE')
@@ -48,7 +48,7 @@
 
                             @if ($ticket->type == 'virtual')
                                 <a href="{{ route('ticket.vr-show', $ticket->id) }}" class="inline">
-                                    <x-primary-button>View in VR</x-primary-button>
+                                    <x-button.primary>View in VR</x-button.primary>
                                 </a>
                             @else
                                 <form action="{{ route('ticket.download', $ticket->id) }}" method="GET"
@@ -56,9 +56,9 @@
 
                                     @csrf
 
-                                    <x-primary-button>Download Ticket
+                                    <x-button.primary>Download Ticket
 
-                                    </x-primary-button>
+                                    </x-button.primary>
                                 </form>
                             @endif
                         @endif
