@@ -14,12 +14,12 @@ class GenreSeeder extends Seeder
      */
     public function run(): void
     {
-        Genre::factory(8)->create();
+        // Genre::factory(8)->create();
 
 
-        foreach (Genre::get() as $genre) {
-            $movies = Movie::inRandomOrder()->take(rand(4, 8))->pluck('id');
-            $genre->movies()->attach($movies);
-        }
+        // foreach (Genre::get() as $genre) {
+        //     $movies = Movie::inRandomOrder()->take(rand(4, 8))->pluck('id');
+        //     $genre->movies()->attach($movies);
+        // }
     }
 }

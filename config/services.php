@@ -38,4 +38,10 @@ return [
         'redirect' => config('app.url') . '/auth/google/callback',
     ],
 
+    'tmdb' => [
+        'token' => env('TMDB_TOKEN'),
+
+    ],
+
+
 ];

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\ShowController;
@@ -55,6 +56,8 @@ Route::get('/reset', function () {
     return back();
 })->name('reset');
 
+
+Route::get('/test', [Controller::class, 'test']);
 require __DIR__ . '/inc/web/auth.php';
 require __DIR__ . '/inc/web/admin.php';
 require __DIR__ . '/inc/web/ticket.php';

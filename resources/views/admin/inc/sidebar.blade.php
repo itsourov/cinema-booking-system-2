@@ -24,17 +24,7 @@
                             </div>
                         </form>
                     </li>
-                    <x-admin.sidebar-menu-item :href="route('admin')" :active="request()->routeIs('admin')">
 
-                        <x-slot name="icon">
-                            <x-ri-dashboard-line />
-                        </x-slot>
-                        <x-slot name="title">
-                            {{ __('Dashboard') }}
-                        </x-slot>
-
-
-                    </x-admin.sidebar-menu-item>
                     <x-admin.sidebar-menu-item :href="route('admin.profile')" :active="request()->routeIs('admin.profile')">
 
                         <x-slot name="icon">

@@ -12,9 +12,8 @@ class Genre extends Model
     use HasFactory;
 
     protected $fillable = [
+        'tmdb_id',
         'title',
-        'slug',
-        'description',
 
     ];
     public function movies()

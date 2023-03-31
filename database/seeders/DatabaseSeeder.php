@@ -35,9 +35,9 @@ class DatabaseSeeder extends Seeder
 
 
         // \App\Models\User::factory(10)->create();
-        $this->call(MovieSeeder::class);
-        $this->call(GenreSeeder::class);
-        $this->call(ShowSeeder::class);
-        $this->call(FoodSeeder::class);
+        // $this->call(MovieSeeder::class);
+        // $this->call(GenreSeeder::class);
+        // $this->call(ShowSeeder::class);
+        // $this->call(FoodSeeder::class);
     }
 }

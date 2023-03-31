@@ -19,6 +19,10 @@
             @endforeach
         </div>
 
+        <div class="py-2">
+            {{ $shows->links('pagination.tailwind') }}
+        </div>
+
     </div>
 
 

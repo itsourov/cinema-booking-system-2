@@ -36,6 +36,9 @@
     @include('inc.footer')
     @include('inc.message')
     @livewireScripts
+    <script src="{{ asset('js/jquery-min.js') }}"></script>
+    <script src="{{ asset('js/view-all-cast.js') }}"></script>
+    @yield('scripts')
     @yield('scripts')
 </body>
 

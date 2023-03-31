@@ -45,7 +45,7 @@ class ShowFactory extends Factory
         return [
             'movie_id' => $movie->id,
             'title' => $movie->title . " Premier",
-            'date' => Carbon::now()->addHours(rand(3, 12))->addMinute(rand(1, 59))->toDateTimeString(),
+            'date' => Carbon::now()->addHours(rand(12, 30))->addMinute(rand(1, 59))->toDateTimeString(),
             'seat' => json_encode($seats),
             'virtual_ticket_price' => 20,
         ];

@@ -17,7 +17,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movie = Movie::with('genres')->latest()->paginate(10);
+        $movie = Movie::latest()->paginate(10);
 
 
         return view('admin.movies.index', [

@@ -10,15 +10,35 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Movie extends Model
 {
     use HasFactory;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
+        'tmdb_id',
         'title',
-        'poster_link',
-        'synopsis',
+        'original_title',
+        'is_adult',
         'release_date',
-        'trailer_link',
+        'runtime',
+        'rating',
+        'images',
+        'poster',
+        'backdrop',
+        'trailers',
+        'cast',
+        'crew',
+        'synopsis',
     ];
 
-    protected $dates = ['release_date'];
+    protected $casts = [
+        'images' => 'array',
+        'trailers' => 'array',
+        'cast' => 'array',
+        'crew' => 'array',
+    ];
+
 
 
     public function scopeFilter($query, array $filters)
@@ -35,6 +55,17 @@ class Movie extends Model
     }
 
 
+
+    public function poster($size)
+    {
+        if (!$this->poster) {
+            return 'https://www.themoviedb.org/assets/2/apple-touch-icon-cfba7699efe7a742de25c28e08c38525f19381d31087c69e89d6bcb8e3c0ddfa.png';
+        }
+        if (str_contains($this->poster, 'https://') || str_contains($this->poster, 'http://')) {
+            return $this->poster;
+        }
+        return 'https://image.tmdb.org/t/p/' . ($size ?? 'orginal') . $this->poster;
+    }
 
     public function genres()
     {

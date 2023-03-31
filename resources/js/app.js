@@ -13,11 +13,3 @@ import Alpine from 'alpinejs'
 window.Alpine = Alpine
 
 Alpine.start()
-
-import jQuery from 'jquery';
-window.$ = jQuery;
-
-$(".accordation").click(function () {
-    $(this).next().slideToggle(100)
-
-});
