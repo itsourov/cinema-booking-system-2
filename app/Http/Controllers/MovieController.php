@@ -54,7 +54,11 @@ class MovieController extends Controller
                 $query->upcoming();
             }
         ]);
-        $userWatchedThisMovie = in_array($movie->id, auth()->user()->movies->pluck('id')->toArray());
+        if (auth()->user()) {
+            $userWatchedThisMovie = in_array($movie->id, auth()->user()->movies->pluck('id')->toArray());
+        } else {
+            $userWatchedThisMovie = false;
+        }
 
         $movie = $movie->loadMissing('videoReviews.user.media');
         return view('movies.show', [
