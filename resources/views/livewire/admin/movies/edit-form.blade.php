@@ -8,6 +8,7 @@
                         <x-input.text wire:model="movieArray.tmdb_id" placeholder="Enter TMDB id" />
                         <x-button.primary wire:click="getInfo" class=" flex-shrink-0 py-1 h-min">Get movie info
                         </x-button.primary>
+
                     </div>
                     <p class="text-yellow-500">Get movie id from <a href="https://www.themoviedb.org/"
                             class="text-primary-500" target="_blank">here</a> </p>
@@ -299,8 +300,42 @@
         </div>
         <div>
             <x-card>
-                <x-button.primary class="w-full" wire:click="SaveNewMovie">Save new movie</x-button.primary>
-                <x-input.error :messages="$errors->get('linkError')" />
+                <x-button.primary class="w-full" wire:click="SaveNewMovie">Update movie</x-button.primary>
+                <div class="py-4">
+                    <h2>Preview</h2>
+                    <a href="{{ route('movies.show', $movie->id) }}">
+
+
+                        <div
+                            class="border dark:border-gray-800 dark:shadow dark:shadow-gray-800 dark:bg-gray-900 rounded-md overflow-clip group">
+                            <div class="poster overflow-clip relative">
+                                <img src="{{ $movie->poster('w500') }}" alt=""
+                                    class="object-cover w-full  group-hover:scale-110 transition duration-300 ease-in-out">
+                                <div
+                                    class=" absolute top-0 right-0 flex items-center bg-black rounded bg-opacity-50 px-1 space-x-1">
+                                    <svg aria-hidden="true" class="w-4 h-4 text-yellow-400" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <title>First star</title>
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                        </path>
+                                    </svg>
+                                    <span class="text-white  text-sm">
+                                        {{ $movie->rating }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+                            <div class="p-2">
+                                <p class="truncate text-black dark:text-white">{{ $movie->title }}</p>
+                                <p class="text-sm text-gray-500">
+                                    {{ date('M. d, Y', strtotime($movie->release_date)) }}</p>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
             </x-card>
         </div>
 

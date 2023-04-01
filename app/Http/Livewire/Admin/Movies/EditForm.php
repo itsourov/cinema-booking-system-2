@@ -8,15 +8,16 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
-class CreateForm extends Component
+class EditForm extends Component
 {
-
 
     public $videoSectionOpened = false;
     public $castSectionOpened = false;
     public $crewSectionOpened = false;
     public $genreSectionOpened = true;
 
+    public Movie $movie;
+    public $genres = [];
 
     public $movieArray = [
         'tmdb_id' => '',
@@ -36,36 +37,41 @@ class CreateForm extends Component
         'certification' => 'unrated',
     ];
 
-    public $genres = [];
-
-
-    protected $rules = [
-
-        'movieArray.tmdb_id' =>  'unique:movies,tmdb_id',
-        'movieArray.title' =>  'required',
-        'movieArray.original_title' =>  'required',
-        'movieArray.is_adult' =>  '',
-        'movieArray.release_date' =>  'date',
-        'movieArray.images' =>  '',
-        'movieArray.trailers' =>  '',
-        'movieArray.cast' =>  '',
-        'movieArray.crew' =>  '',
-        'movieArray.poster' =>  '',
-        'movieArray.backdrop' =>  '',
-        'movieArray.synopsis' =>  '',
-        'movieArray.rating' =>  '',
-        'movieArray.runtime' =>  '',
-        'movieArray.certification' =>  '',
-    ];
+    protected function rules()
+    {
+        return [
+            'movieArray.tmdb_id' =>  'unique:movies,tmdb_id,' . $this->movie->id,
+            'movieArray.title' =>  'required',
+            'movieArray.original_title' =>  'required',
+            'movieArray.is_adult' =>  '',
+            'movieArray.release_date' =>  'date',
+            'movieArray.images' =>  '',
+            'movieArray.trailers' =>  '',
+            'movieArray.cast' =>  '',
+            'movieArray.crew' =>  '',
+            'movieArray.poster' =>  '',
+            'movieArray.backdrop' =>  '',
+            'movieArray.synopsis' =>  '',
+            'movieArray.rating' =>  '',
+            'movieArray.runtime' =>  '',
+            'movieArray.certification' =>  'required',
+        ];
+    }
 
     public function render()
     {
-        return view('livewire.admin.movies.create-form');
+        return view('livewire.admin.movies.edit-form');
     }
-    // public function mount()
-    // {
-    //     $this->getInfo();
-    // }
+    public function mount(Movie $movie)
+    {
+        $this->movie = $movie;
+        $this->genres = json_decode($movie->genres);
+        $this->movieArray = $movie->toArray();
+    }
+
+
+
+
     public function videoSectionToggle()
     {
         $this->videoSectionOpened = !$this->videoSectionOpened;
@@ -125,6 +131,7 @@ class CreateForm extends Component
     {
         array_push($this->genres, ['title' => '', 'tmdb_id' => '']);
     }
+
 
 
     public function getInfo()
@@ -203,7 +210,6 @@ class CreateForm extends Component
         }
     }
 
-
     public function SaveNewMovie()
     {
 
@@ -224,7 +230,7 @@ class CreateForm extends Component
         DB::beginTransaction();
 
 
-        $newMovie =   Movie::create($validatedData['movieArray']);
+        $this->movie->update($validatedData['movieArray']);
 
 
         $genreIds = [];
@@ -233,9 +239,9 @@ class CreateForm extends Component
             $newGenre =  Genre::firstOrCreate($genre, $genre);
             array_push($genreIds, $newGenre->id);
         }
-        $newMovie->genres()->sync($genreIds);
+        $this->movie->genres()->sync($genreIds);
 
         DB::commit();
-        return redirect(route('movies.show', $newMovie->id));
+        return redirect(route('movies.show', $this->movie->id));
     }
 }
