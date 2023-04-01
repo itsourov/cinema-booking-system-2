@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\ShowSeeder;
 use Database\Seeders\GenreSeeder;
 use Database\Seeders\MovieSeeder;
+use Database\Seeders\VideoReviewSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,6 +38,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GenreSeeder::class);
         $this->call(ShowSeeder::class);
         $this->call(FoodSeeder::class);
+        $this->call(VideoReviewSeeder::class);
         // \App\Models\User::factory(10)->create();
 
     }

@@ -9,6 +9,7 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecomendationController;
 use App\Http\Controllers\VideoJsController;
+use App\Http\Controllers\VideoReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('movies')->group(function () {
     Route::get('/', [MovieController::class, 'index'])->name('movies.index');
     Route::get('/{movie}', [MovieController::class, 'show'])->name('movies.show');
+    Route::post('/{movie}/video_reviews/create', [VideoReviewController::class, 'store'])->name('movies.video_reviews.create');
 });
 Route::prefix('shows')->group(function () {
     Route::get('/', [ShowController::class, 'index'])->name('shows.index');

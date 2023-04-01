@@ -44,6 +44,7 @@ class MovieController extends Controller
     public function show(Movie $movie)
     {
 
+
         $movie = $movie->loadMissing([
             'shows' => function ($query) {
                 $query->upcoming();
@@ -53,9 +54,12 @@ class MovieController extends Controller
                 $query->upcoming();
             }
         ]);
-        // return $movie;
+        $userWatchedThisMovie = in_array($movie->id, auth()->user()->movies->pluck('id')->toArray());
+
+        $movie = $movie->loadMissing('videoReviews.user.media');
         return view('movies.show', [
             'movie' => $movie,
+            'userWatchedThisMovie' => $userWatchedThisMovie,
         ]);
     }
 

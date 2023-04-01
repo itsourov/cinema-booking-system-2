@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Genre;
 use App\Models\Movie;
+use App\Models\VideoReview;
 use Spatie\Image\Manipulations;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
@@ -71,5 +72,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function movies()
     {
         return $this->belongsToMany(Movie::class);
+    }
+    public function videoReviews()
+    {
+        return $this->hasMany(VideoReview::class);
     }
 }

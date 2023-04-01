@@ -19,7 +19,7 @@ class UploadController extends Controller
             $file = $request->file('thumbnail');
             $fileName = $file->getClientOriginalName();
             $folder = uniqid() . "-" . now()->timestamp;
-            $file->storeAs('public/temp/thumbnail/' . $folder, $fileName);
+            $file->storeAs('public/temp/' . $folder, $fileName);
 
             TemporaryFile::create([
                 'folder' => $folder,
@@ -31,7 +31,19 @@ class UploadController extends Controller
             $file = $request->file('profileImage');
             $fileName = $file->getClientOriginalName();
             $folder = uniqid() . "-" . now()->timestamp;
-            $file->storeAs('public/temp/profile/' . $folder, $fileName);
+            $file->storeAs('public/temp/' . $folder, $fileName);
+
+            TemporaryFile::create([
+                'folder' => $folder,
+                'filename' => $fileName,
+            ]);
+
+            return response($folder);
+        } elseif ($request->hasFile('reviewVideo')) {
+            $file = $request->file('reviewVideo');
+            $fileName = $file->getClientOriginalName();
+            $folder = uniqid() . "-" . now()->timestamp;
+            $file->storeAs('public/temp/' . $folder, $fileName);
 
             TemporaryFile::create([
                 'folder' => $folder,
@@ -40,7 +52,7 @@ class UploadController extends Controller
 
             return response($folder);
         }
-        return '';
+        return 'unvalidated file recieved';
     }
 
     public function destroy(Request $request)
@@ -48,6 +60,6 @@ class UploadController extends Controller
         $fileId = request()->getContent();
         $temporaryFile =    TemporaryFile::where('folder', $fileId)->first();
         $temporaryFile->delete();
-        return Storage::deleteDirectory('public/temp/thumbnail/' . $fileId);
+        return Storage::deleteDirectory('public/temp/' . $fileId);
     }
 }
