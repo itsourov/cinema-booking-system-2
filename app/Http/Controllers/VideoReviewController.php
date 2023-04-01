@@ -40,12 +40,15 @@ class VideoReviewController extends Controller
         if ($request->hasFile('reviewVideo')) {
 
             $file = $request->file('reviewVideo');
-            $filename = $movie->id . '_' . auth()->user()->id;
+            $filename = $movie->id . '_' . auth()->user()->id . '.mp4';
             $path = storage_path() . '/app/public/review-video/';
             $file->move($path, $filename);
 
-            VideoReview::create(
-
+            VideoReview::updateOrCreate(
+                [
+                    'user_id' => auth()->user()->id,
+                    'movie_id' => $movie->id,
+                ],
                 [
                     'video' => 'storage/review-video/' . $filename,
                     'user_id' => auth()->user()->id,
@@ -78,7 +81,7 @@ class VideoReviewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateVideoReviewRequest $request, VideoReview $videoReview)
+    public function update(Request $request, VideoReview $videoReview)
     {
         //
     }

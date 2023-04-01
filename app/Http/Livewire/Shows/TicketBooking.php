@@ -52,7 +52,7 @@ class TicketBooking extends Component
         foreach ($this->show->movie->genres as $genre) {
             auth()->user()->genres()->syncWithoutDetaching($genre->id);
         }
-        auth()->user()->movies()->syncWithoutDetaching($this->show->movie->id);
+
         if ($ticket) {
             session()->flash('message', 'Redirecting to payment page');
             return redirect()->route('ticket.show', $ticket->id);

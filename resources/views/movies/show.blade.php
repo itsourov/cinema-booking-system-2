@@ -42,43 +42,49 @@
                         </div>
                     @endforeach
                 </div>
-                @if ($userWatchedThisMovie)
-                    <div class="mt-5" x-data="{ showVideoReviwUploader: false }">
-                        <x-button.primary x-on:click="showVideoReviwUploader = !showVideoReviwUploader">Rate this movie
-                            <x-ri-star-half-s-fill />
-                        </x-button.primary>
 
+                <div class="mt-5" x-data="{ showVideoReviwUploader: false }">
+                    <x-button.primary x-on:click="showVideoReviwUploader = !showVideoReviwUploader">Rate this movie
+                        <x-ri-star-half-s-fill />
+                    </x-button.primary>
+                    @if ($userWatchedThisMovie)
                         <form action="{{ route('movies.video_reviews.create', $movie->id) }}" method="post"
                             enctype="multipart/form-data">
                             <div x-show="showVideoReviwUploader" class="mt-3" x-transition>
                                 @csrf
                                 <input type="file" id="reviewVideoInput" accept="video/*" name="reviewVideo">
-                                <x-button.primary>Save
+                                <x-button.primary>Save </x-button.primary>
                             </div>
                             <x-input.error :messages="$errors->get('reviewVideo')" />
                         </form>
-                        </x-button.primary>
-
-                    </div>
-
-
-                    <script>
-                        window.onload = function(e) {
+                        <script>
+                            window.onload = function(e) {
 
 
-                            // Get a reference to the file input element
-                            const inputElement = document.querySelector('input[id="reviewVideoInput"]');
-                            // Create a FilePond instance
-                            const pond = FilePond.create(inputElement, {
-                                // Only accept images
-                                acceptedFileTypes: ['video/mp4'],
-                                storeAsFile: true,
+                                // Get a reference to the file input element
+                                const inputElement = document.querySelector('input[id="reviewVideoInput"]');
+                                // Create a FilePond instance
+                                const pond = FilePond.create(inputElement, {
+                                    // Only accept images
+                                    acceptedFileTypes: ['video/mp4'],
+                                    storeAsFile: true,
 
-                            });
+                                });
 
-                        }
-                    </script>
-                @endif
+                            }
+                        </script>
+                    @else
+                        <div x-show="showVideoReviwUploader">
+                            <h2>You haven't watched this movie or booked ticket for this movie</h2>
+                        </div>
+                    @endif
+
+
+                </div>
+
+
+
+
             </div>
 
 

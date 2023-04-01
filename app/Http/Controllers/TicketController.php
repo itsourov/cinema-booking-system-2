@@ -126,7 +126,7 @@ class TicketController extends Controller
                 'paid_amount' => $price,
                 'payment_time' => Carbon::now()->toDateTimeString(),
             ]);
-
+            auth()->user()->movies()->syncWithoutDetaching($ticket->show->movie->id);
             DB::commit();
             return back()->with('message', 'Ticket Payment Done');
         } else {
@@ -157,6 +157,7 @@ class TicketController extends Controller
                 'paid_amount' => null,
                 'payment_time' => null,
             ]);
+            auth()->user()->movies()->detach($ticket->show->movie->id);
             DB::commit();
             return back()->with('message', 'Ticket Cancled ');
         }
