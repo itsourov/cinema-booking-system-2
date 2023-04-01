@@ -82,6 +82,27 @@
                         </x-slot>
 
                     </x-admin.sidebar-menu-item>
+                    <x-admin.sidebar-menu-item :active="request()->routeIs('admin.foods*')" :dropdown="true">
+
+                        <x-slot name="icon">
+                            <x-ri-folder-add-fill />
+                        </x-slot>
+                        <x-slot name="title">
+                            {{ __('Foods') }}
+                        </x-slot>
+
+                        <x-slot name="submenu">
+                            <x-admin.sidebar-sub-menu-item :href="route('admin.foods.index')" :active="request()->routeIs('admin.foods.index')">
+                                View all Foods
+                            </x-admin.sidebar-sub-menu-item>
+
+                            <x-admin.sidebar-sub-menu-item :href="route('admin.foods.create')" :active="request()->routeIs('admin.foods.create')">
+                                Create Foods
+                            </x-admin.sidebar-sub-menu-item>
+
+                        </x-slot>
+
+                    </x-admin.sidebar-menu-item>
 
 
 

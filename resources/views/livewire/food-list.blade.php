@@ -8,7 +8,7 @@
                         <img src="{{ $food->image }}" alt="" class="rounded">
                         <div>
                             <h3 class="text-xl font-bold">{{ $food->name }}</h3>
-                            <p>Price: {{ $food->price }} Currency</p>
+                            <p>Price: {{ $food->price }} GBP</p>
                         </div>
                         <div class="flex items-center gap-2">
                             <x-text-input placeholder="quantity" wire:model="selected.index{{ $food->id }}.qty"

@@ -12,7 +12,7 @@
                     <p class="text-center">Payment status: <span class=" font-bold">{{ $order->payment_status }}</span>
                     </p>
 
-                    <p class="text-center">Order Price: <span class=" font-bold">{{ $order->price }}</span> currency</p>
+                    <p class="text-center">Order Price: <span class=" font-bold">{{ $order->price }}</span> GBP</p>
 
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

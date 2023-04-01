@@ -5,6 +5,7 @@
 
 use UniSharp\LaravelFilemanager\Lfm;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\FoodController;
 use App\Http\Controllers\Admin\ShowController;
 use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\MovieController;
@@ -39,6 +40,14 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/{show}/preview', [ShowController::class, 'show'])->name('admin.shows.show');
         Route::put('/{show}', [ShowController::class, 'update'])->name('admin.shows.update');
         Route::delete('/{show}', [ShowController::class, 'destroy'])->name('admin.shows.delete');
+    });
+    Route::prefix('foods')->group(function () {
+        Route::get('/', [FoodController::class, 'index'])->name('admin.foods.index');
+        Route::get('/create', [FoodController::class, 'create'])->name('admin.foods.create');
+        Route::post('/create', [FoodController::class, 'store']);
+        Route::get('/{food}', [FoodController::class, 'edit'])->name('admin.foods.edit');
+        Route::put('/{food}', [FoodController::class, 'update'])->name('admin.foods.update');
+        Route::delete('/{food}/delete', [FoodController::class, 'destroy'])->name('admin.foods.delete');
     });
 });
 
