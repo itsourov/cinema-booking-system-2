@@ -85,15 +85,13 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                             @foreach ($movieArray['trailers'] ?? [] as $index => $video)
                                 <div class="border dark:border-gray-700 dark:bg-gray-900 rounded p-2 space-y-4">
-                                    <div class="video-container">
 
 
-                                        <iframe id="trailerVideoPreview"
-                                            src="https://www.youtube.com/embed/{{ $movieArray['trailers'][$index]['key'] ?? '' }}"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            allowfullscreen></iframe>
-                                    </div>
+
+
+                                    <img src="https://i.ytimg.com/vi/{{ $movieArray['trailers'][$index]['key'] ?? '' }}/sddefault.jpg"
+                                        alt="">
+
                                     <div>
                                         <x-input.label value="{{ __('Video name') }}" />
                                         <x-input.text type="text"

@@ -180,10 +180,19 @@ class CreateForm extends Component
             'images' => ($movie->image->backdrops),
             'poster' => $movie->poster_path,
             'backdrop' => $movie->backdrop_path,
-            'trailers' => ($movie->video->results),
+            'trailers' => json_decode(
+                json_encode($movie->video->results),
+                true
+            ),
             'rating' => ($movie->vote_average),
-            'cast' => ($movie->credits->cast),
-            'crew' => ($movie->credits->crew),
+            'cast' => json_decode(
+                json_encode(($movie->credits->cast)),
+                true
+            ),
+            'crew' => json_decode(
+                json_encode(($movie->credits->crew)),
+                true
+            ),
             'synopsis' => ($movie->overview),
             'certification' => $certification,
         ];
