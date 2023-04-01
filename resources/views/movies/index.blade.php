@@ -3,7 +3,15 @@
         @if ($movies->isEmpty())
             <x-seed-button />
         @endif
-        <h2 class=" text-base font-bold">Latest movies</h2>
+
+        @if (request('genre'))
+            <div class="bg-primary-500 rounded bg-opacity-50 p-2 text-center">
+                Genre based results
+            </div>
+        @else
+            <h2 class=" text-base font-bold">Latest movies</h2>
+        @endif
+
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-2 gap-y-6">
             @foreach ($movies as $movie)

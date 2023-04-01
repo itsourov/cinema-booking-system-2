@@ -19,7 +19,8 @@
 
                     <div class="flex divide-x dark:divide-gray-500">
                         @foreach ($movie->genres as $genre)
-                            <a href="/" class="hover:text-primary-600 px-2">{{ $genre->title }}</a>
+                            <a href="{{ route('movies.index', ['genre' => $genre->id]) }}"
+                                class="hover:text-primary-600 px-2">{{ $genre->title }}</a>
                         @endforeach
                     </div>
 
@@ -29,10 +30,15 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 ">
                     @foreach ($movie->shows as $show)
-                        <div class="border rounded bg-gray-100 dark:bg-gray-800 ">
-                            <a href="{{ route('shows.show', $show->id) }}" class="block p-4">
-                                {{ date('d M, Y h:i A', strtotime($show->date)) . ' (GMT)' }}
+                        <div
+                            class="border rounded bg-gray-100 dark:bg-gray-800  flex flex-col justify-center p-1 space-y-1">
+
+                            <p> {{ date('d M, Y h:i A', strtotime($show->date)) . ' (GMT)' }}</p>
+                            <a href="{{ route('shows.show', $show->id) }}"
+                                class=" bg-primary-500 p-1 rounded text-center">
+                                Book a seat
                             </a>
+
                         </div>
                     @endforeach
                 </div>
