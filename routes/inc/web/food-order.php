@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\FoodOrderController as AdminFoodOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodOrderController;
 

@@ -11,6 +11,7 @@ class FoodOrder extends Model
 
     protected $fillable = [
         'payment_status',
+        'order_status',
 
 
     ];

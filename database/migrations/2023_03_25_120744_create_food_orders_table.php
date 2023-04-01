@@ -17,6 +17,7 @@ return new class extends Migration
             $table->float('price');
             $table->json('foods');
             $table->string('payment_status')->default('unpaid');
+            $table->string('order_status')->default('pending');
             $table->timestamps();
         });
     }

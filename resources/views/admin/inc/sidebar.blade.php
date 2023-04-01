@@ -99,6 +99,9 @@
                             <x-admin.sidebar-sub-menu-item :href="route('admin.foods.create')" :active="request()->routeIs('admin.foods.create')">
                                 Create Foods
                             </x-admin.sidebar-sub-menu-item>
+                            <x-admin.sidebar-sub-menu-item :href="route('admin.fo.index')" :active="request()->routeIs('admin.fo.index')">
+                                Food order
+                            </x-admin.sidebar-sub-menu-item>
 
                         </x-slot>
 

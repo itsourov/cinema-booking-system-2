@@ -24,6 +24,7 @@ class UpdateFoodOrderRequest extends FormRequest
     {
         return [
             'payment_status' => ['required', 'string', 'max:255'],
+
         ];
     }
 }

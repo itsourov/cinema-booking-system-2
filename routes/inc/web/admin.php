@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FoodOrderController;
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin');
@@ -48,6 +49,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/{food}', [FoodController::class, 'edit'])->name('admin.foods.edit');
         Route::put('/{food}', [FoodController::class, 'update'])->name('admin.foods.update');
         Route::delete('/{food}/delete', [FoodController::class, 'destroy'])->name('admin.foods.delete');
+    });
+    Route::prefix('food-order')->group(function () {
+        Route::get('/', [FoodOrderController::class, 'index'])->name('admin.fo.index');
+        Route::put('/{food_order}', [FoodOrderController::class, 'update'])->name('admin.fo.update');
     });
 });
 
