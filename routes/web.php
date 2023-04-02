@@ -52,6 +52,7 @@ Route::prefix('shows')->group(function () {
 
 Route::get('/my-recomendation', [RecomendationController::class, 'index'])->middleware('auth')->name('recomendation');
 Route::get('/video-js/{ticket}', [VideoJsController::class, 'view'])->middleware('auth')->name('videojs.view');
+Route::get('/video-js/test', [VideoJsController::class, 'view'])->middleware('auth')->name('videojs.test');
 
 Route::get('/reset', function () {
     Artisan::call('migrate:fresh', ['--seed' => ' ']);

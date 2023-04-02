@@ -34,12 +34,10 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        // $this->call(MovieSeeder::class);
-        // $this->call(GenreSeeder::class);
-        // $this->call(ShowSeeder::class);
+        $this->call(MovieSeeder::class);
+        $this->call(GenreSeeder::class);
+        $this->call(ShowSeeder::class);
         $this->call(FoodSeeder::class);
-        // $this->call(VideoReviewSeeder::class);
-        // \App\Models\User::factory(10)->create();
-
+        $this->call(VideoReviewSeeder::class);
     }
 }
