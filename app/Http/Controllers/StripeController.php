@@ -34,7 +34,7 @@ class StripeController extends Controller
                     'price_data' => [
                         'currency' => 'gbp',
                         'product_data' => [
-                            'name' => json_encode($ticket->seat_number),
+                            'name' => json_encode($ticket->seat_number) . " for " . $ticket->show->title,
                         ],
                         'unit_amount' => $price * 100,
                     ],
