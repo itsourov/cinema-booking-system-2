@@ -25,11 +25,11 @@
             </div>
             <div class="text-center mt-5">
                 @if ($ticket->payment_status != 'paid')
-                    <form action="{{ route('ticket.update', $ticket->id) }}" method="post">
-                        @method('PUT')
+                    <form action="{{ route('stripe.ticket', $ticket->id) }}" method="post" class="inline">
+
                         @csrf
-                        <input type="hidden" name="payment_status" value="paid">
-                        <x-button.primary>Make Payment</x-button.primary>
+
+                        <x-button.primary>Make Payment (stripe)</x-button.primary>
                     </form>
                     <form action="{{ route('ticket.delete', $ticket->id) }}" method="post">
                         @method('DELETE')
@@ -38,10 +38,10 @@
                         <x-button.danger>Delete Ticket</x-button.danger>
                     </form>
                 @else
-                    <form action="{{ route('ticket.update', $ticket->id) }}" method="post">
+                    <form action="{{ route('ticket.cancel', $ticket->id) }}" method="post">
                         @method('PUT')
                         @csrf
-                        <input type="hidden" name="payment_status" value="unpaid">
+
                         <x-button.danger>Request Refund</x-button.danger>
                     </form>
 

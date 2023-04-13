@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Show;
 use App\Models\Ticket;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTicketRequest;
@@ -17,8 +18,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $dateTime =  Carbon::now()->toDateTimeString();
-        $tickets =   Ticket::where('user_id', auth()->user()->id)->latest()->with('show')->paginate(10);
+        $dateTime = Carbon::now()->toDateTimeString();
+        $tickets = Ticket::where('user_id', auth()->user()->id)->latest()->with('show')->paginate(10);
         return view('tickets.index', [
             'tickets' => $tickets,
             'dateTime' => $dateTime,
@@ -59,7 +60,7 @@ class TicketController extends Controller
 
 
 
-        $dateTime =  Carbon::now()->toDateTimeString();
+        $dateTime = Carbon::now()->toDateTimeString();
         return view('tickets.payment', [
             'ticket' => $ticket,
             'dateTime' => $dateTime,
@@ -77,90 +78,44 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTicketRequest $request, Ticket $ticket)
+    public function cancel(Request $request, Ticket $ticket)
     {
         DB::beginTransaction();
-        $ticket->update($request->validated());
 
 
-        $price = 0;
-        if ($ticket->type == 'virtual') {
-            $price = $ticket->show->virtual_ticket_price * $ticket->qty;
-        } else {
+
+        if ($ticket->type != 'virtual') {
             foreach ($ticket->seat_number as $key => $seat) {
                 $row = substr($seat, 0, 1);
                 $col = substr($seat, 1, 2);
-                $price += json_decode(Show::where('id', $ticket->show->id)->first()->seat)->$row->$col->price;
+
+                $json = json_decode(Show::where('id', $ticket->show->id)->first()->seat);
+
+
+
+                if ($json->$row->$col->status != 'booked' || $json->$row->$col->user_id != auth()->user()->id) {
+                    DB::rollBack();
+                    return back()->with('message', 'Ticket ' . $row . $col . ' is invalid');
+                }
+                $json->$row->$col->status = "available";
+                $json->$row->$col->user_id = '';
+
+
+                Show::where('id', $ticket->show->id)->first()->update([
+                    'seat' => json_encode($json),
+
+                ]);
             }
         }
+        $ticket->update([
+            'paid_amount' => null,
+            'payment_time' => null,
+            'payment_status' => 'unpaid',
+        ]);
+        auth()->user()->movies()->detach($ticket->show->movie->id);
+        DB::commit();
+        return back()->with('message', 'Ticket Cancled ');
 
-        if ($request->payment_status == 'paid') {
-
-
-            if ($ticket->type != 'virtual') {
-
-                foreach ($ticket->seat_number as $key => $seat) {
-                    $row = substr($seat, 0, 1);
-                    $col = substr($seat, 1, 2);
-
-                    $json =   json_decode(Show::where('id', $ticket->show->id)->first()->seat);
-
-                    if ($json->$row->$col->status != 'available') {
-                        DB::rollBack();
-                        return back()->with('message', 'Ticket ' . $row . $col . ' is no longer available to book');
-                    }
-
-                    $json->$row->$col->status = "booked";
-                    $json->$row->$col->user_id = auth()->user()->id;
-
-
-
-                    Show::where('id', $ticket->show->id)->first()->update([
-                        'seat' => json_encode($json),
-
-                    ]);
-                }
-            }
-
-            $ticket->update([
-                'paid_amount' => $price,
-                'payment_time' => Carbon::now()->toDateTimeString(),
-            ]);
-            auth()->user()->movies()->syncWithoutDetaching($ticket->show->movie->id);
-            DB::commit();
-            return back()->with('message', 'Ticket Payment Done');
-        } else {
-            if ($ticket->type != 'virtual') {
-                foreach ($ticket->seat_number as $key => $seat) {
-                    $row = substr($seat, 0, 1);
-                    $col = substr($seat, 1, 2);
-
-                    $json =   json_decode(Show::where('id', $ticket->show->id)->first()->seat);
-
-
-
-                    if ($json->$row->$col->status != 'booked' || $json->$row->$col->user_id != auth()->user()->id) {
-                        DB::rollBack();
-                        return back()->with('message', 'Ticket ' . $row . $col . ' is invalid');
-                    }
-                    $json->$row->$col->status = "available";
-                    $json->$row->$col->user_id = '';
-
-
-                    Show::where('id', $ticket->show->id)->first()->update([
-                        'seat' => json_encode($json),
-
-                    ]);
-                }
-            }
-            $ticket->update([
-                'paid_amount' => null,
-                'payment_time' => null,
-            ]);
-            auth()->user()->movies()->detach($ticket->show->movie->id);
-            DB::commit();
-            return back()->with('message', 'Ticket Cancled ');
-        }
     }
 
     /**
@@ -175,7 +130,7 @@ class TicketController extends Controller
     public function download(Ticket $ticket)
     {
 
-        $ticket =  $ticket->loadMissing(['user', 'show.movie']);
+        $ticket = $ticket->loadMissing(['user', 'show.movie']);
         // return $ticket;
         $pdf = Pdf::loadView('tickets.pdf', [
             "data" => json_encode($ticket),

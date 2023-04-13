@@ -5,11 +5,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RecomendationController;
 use App\Http\Controllers\VideoJsController;
 use App\Http\Controllers\VideoReviewController;
+use App\Http\Controllers\RecomendationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,14 @@ Route::get('/reset', function () {
 
 
 Route::get('/test', [Controller::class, 'test']);
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::post('/stripe-payment/{ticket}', [StripeController::class, 'ticketPayemtn'])->name('stripe.ticket');
+    Route::get('/stripe-payment/success', [StripeController::class, 'successTicket'])->name('stripe.success');
+});
+
 require __DIR__ . '/inc/web/auth.php';
 require __DIR__ . '/inc/web/admin.php';
 require __DIR__ . '/inc/web/ticket.php';

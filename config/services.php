@@ -42,6 +42,11 @@ return [
         'token' => env('TMDB_TOKEN'),
 
     ],
+    'stripe' => [
+        'pkey' => env('STRIPE_PUBLIC'),
+        'skey' => env('STRIPE_SECRET'),
+
+    ],
 
 
 ];

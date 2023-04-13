@@ -17,6 +17,7 @@ class Ticket extends Model
         'payment_time',
         'type',
         'qty',
+        'stripe_session_id',
 
 
     ];
