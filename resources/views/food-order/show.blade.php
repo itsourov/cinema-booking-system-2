@@ -45,10 +45,10 @@
 
             <div class="text-center mt-5">
                 @if ($order->payment_status != 'paid')
-                    <form action="{{ route('food-order.update', $order->id) }}" method="post">
-                        @method('PUT')
+                    <form action="{{ route('stripe.food-order.payment', $order->id) }}" method="post">
+
                         @csrf
-                        <input type="hidden" name="payment_status" value="paid">
+
                         <x-button.primary>Make Payment</x-button.primary>
                     </form>
                     <form action="{{ route('food-order.delete', $order->id) }}" method="post">
@@ -58,10 +58,10 @@
                         <x-button.danger>Delete Order</x-button.danger>
                     </form>
                 @else
-                    <form action="{{ route('food-order.update', $order->id) }}" method="post">
-                        @method('PUT')
+                    <form action="{{ route('food-order.cancel', $order->id) }}" method="post">
+
                         @csrf
-                        <input type="hidden" name="payment_status" value="unpaid">
+
                         <x-button.danger>Request Refund</x-button.danger>
                     </form>
                 @endif

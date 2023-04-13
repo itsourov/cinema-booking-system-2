@@ -12,6 +12,8 @@ class FoodOrder extends Model
     protected $fillable = [
         'payment_status',
         'order_status',
+        'paid_amount',
+        'stripe_session_id',
 
 
     ];

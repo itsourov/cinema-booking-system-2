@@ -32,7 +32,7 @@ class FoodList extends Component
             $priceOfS = Food::find(substr($key, 5))->price;
 
             $qtyOfS = $s['qty'];
-            $this->price +=  $priceOfS * $qtyOfS;
+            $this->price += $priceOfS * $qtyOfS;
         }
         if ($this->price == 0) {
             $this->selected = [];
@@ -42,7 +42,7 @@ class FoodList extends Component
     {
 
         if (($this->selected['index' . $index]['qty'] ?? 0) > 0) {
-            $this->selected['index' . $index]['qty'] = $this->selected['index' . $index]['qty']  - 1;
+            $this->selected['index' . $index]['qty'] = $this->selected['index' . $index]['qty'] - 1;
         }
 
         $this->price = 0;
@@ -52,7 +52,7 @@ class FoodList extends Component
             $priceOfS = Food::find(substr($key, 5))->price;
 
             $qtyOfS = $s['qty'];
-            $this->price +=  $priceOfS * $qtyOfS;
+            $this->price += $priceOfS * $qtyOfS;
         }
         if ($this->price == 0) {
             $this->selected = [];
@@ -97,7 +97,7 @@ class FoodList extends Component
             $priceOfS = Food::find(substr($key, 5))->price;
 
             $qtyOfS = $s['qty'];
-            $orderPrice +=  $priceOfS * $qtyOfS;
+            $orderPrice += $priceOfS * $qtyOfS;
             $foods[substr($key, 5)]['name'] = Food::find(substr($key, 5))->name;
             $foods[substr($key, 5)]['qty'] = $s['qty'];
             $foods[substr($key, 5)]['price'] = Food::find(substr($key, 5))->price;

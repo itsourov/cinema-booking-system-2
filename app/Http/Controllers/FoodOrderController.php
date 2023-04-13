@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FoodOrder;
+use Illuminate\Support\Facades\Request;
 use App\Http\Requests\StoreFoodOrderRequest;
 use App\Http\Requests\UpdateFoodOrderRequest;
-use App\Models\FoodOrder;
 
 class FoodOrderController extends Controller
 {
@@ -56,17 +57,14 @@ class FoodOrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFoodOrderRequest $request, FoodOrder $foodOrder)
+    public function cancel(Request $request, FoodOrder $foodOrder)
     {
 
-        if ($request->payment_status == 'paid') {
-            $foodOrder->update($request->validated());
-            return back()->with('message', 'Food order Payment Done');
-        } else {
-            $foodOrder->update($request->validated());
-            return back()->with('message', 'Food order cancled');
-            //TODO: issue refund function
-        }
+
+        $foodOrder->update(['payment_status' => 'unpaid']);
+        return back()->with('message', 'Food order cancled');
+        //TODO: issue refund function
+
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FoodOrder;
 use Carbon\Carbon;
 use App\Models\Show;
 use App\Models\Ticket;
@@ -100,7 +101,70 @@ class StripeController extends Controller
                 ]);
                 auth()->user()->movies()->syncWithoutDetaching($ticket->show->movie->id);
 
-                return back()->with('message', 'Ticket Payment Done');
+                return redirect(route('ticket.index'))->with('message', 'Ticket Payment Done');
+            }
+
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function FoodOrderpayment(Request $request, FoodOrder $foodOrder)
+    {
+
+        // return $foodOrder;
+
+        $lineItemsData = [];
+        foreach ($foodOrder->foods as $food) {
+
+            $lineItemsData[] = [
+                'price_data' => [
+                    'currency' => 'gbp',
+                    'product_data' => [
+                        'name' => $food['name'],
+                    ],
+                    'unit_amount' => $food['price'] * 100,
+                ],
+                'quantity' => $food['qty'],
+            ];
+        }
+
+        $stripe = new \Stripe\StripeClient(config('services.stripe.skey'));
+
+        $checkout_session = $stripe->checkout->sessions->create([
+            'line_items' => $lineItemsData,
+            'mode' => 'payment',
+            'payment_method_types' => ['card'],
+            'customer_email' => auth()->user()->email,
+
+            'success_url' => route('stripe.food-order.success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('food-order.index'),
+        ]);
+
+        $foodOrder->update(['stripe_session_id' => $checkout_session->id]);
+        return redirect($checkout_session->url);
+    }
+
+    public function successFoodOrder(Request $request)
+    {
+        $stripe = new \Stripe\StripeClient(config('services.stripe.skey'));
+
+        try {
+            $session = $stripe->checkout->sessions->retrieve(
+                $request->session_id,
+                []
+            );
+            $foodOrder = FoodOrder::where('stripe_session_id', $session->id)->first();
+            if (!$foodOrder) {
+                throw new \Exception("No Food order found for this payment. Contact support with this id:" . $session->id, 404);
+
+            } else {
+
+
+                $foodOrder->update(['payment_status' => 'paid']);
+
+                return redirect(route('food-order.show', $foodOrder->id))->with('message', 'Food order Payment Done');
             }
 
 
