@@ -16,33 +16,32 @@ class MovieSeeder extends Seeder
     {
         // \App\Models\Movie::factory(20)->create();
 
-        $response = cache()->remember('popular-movies', 60 * 60, function () {
 
-            $response = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/popular');
 
-            return json_decode($response);
-        });
+        $response = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/popular');
+
+        $response = json_decode($response);
+
 
         foreach ($response->results as $movie) {
             $movieid = $movie->id;
-            $movieJson = cache()->remember($movieid, 60 * 60, function () use ($movieid) {
 
-                $movieRes = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $movieid . '?append_to_response=release_dates');
-                $imageRes = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $movieid . '/images');
-                $videoRes = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $movieid . '/videos');
-                $creditRes = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $movieid . '/credits');
 
-                $movieJson =  json_decode($movieRes);
-                $creditJson =  json_decode($creditRes);
-                $videoJson =  json_decode($videoRes);
-                $imageJson =  json_decode($imageRes);
+            $movieRes = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $movieid . '?append_to_response=release_dates');
+            $imageRes = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $movieid . '/images');
+            $videoRes = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $movieid . '/videos');
+            $creditRes = Http::accept('application/json')->withToken(config('services.tmdb.token'))->get('https://api.themoviedb.org/3/movie/' . $movieid . '/credits');
 
-                $movieJson->credits = $creditJson;
-                $movieJson->video = $videoJson;
-                $movieJson->image = $imageJson;
+            $movieJson = json_decode($movieRes);
+            $creditJson = json_decode($creditRes);
+            $videoJson = json_decode($videoRes);
+            $imageJson = json_decode($imageRes);
 
-                return $movieJson;
-            });
+            $movieJson->credits = $creditJson;
+            $movieJson->video = $videoJson;
+            $movieJson->image = $imageJson;
+
+
 
             $movie = $movieJson;
             $certification = 'Unrated';
@@ -51,7 +50,7 @@ class MovieSeeder extends Seeder
                     $certification = $cReleases->release_dates[0]->certification;
                 }
             }
-            $newMovie =    Movie::create([
+            $newMovie = Movie::create([
                 'tmdb_id' => $movie->id,
                 'title' => $movie->title,
                 'original_title' => $movie->title,
@@ -70,8 +69,8 @@ class MovieSeeder extends Seeder
             ]);
 
             $genreIds = [];
-            foreach ($movie->genres as  $genre) {
-                $newGenre =  Genre::firstOrCreate(['tmdb_id' => $genre->id, 'title' => $genre->name], ['tmdb_id' => $genre->id, 'title' => $genre->name]);
+            foreach ($movie->genres as $genre) {
+                $newGenre = Genre::firstOrCreate(['tmdb_id' => $genre->id, 'title' => $genre->name], ['tmdb_id' => $genre->id, 'title' => $genre->name]);
                 array_push($genreIds, $newGenre->id);
             }
             $newMovie->genres()->sync($genreIds);

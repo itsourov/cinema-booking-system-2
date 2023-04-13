@@ -12,6 +12,6 @@ class VideoReviewSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\VideoReview::factory(100)->create();
+        \App\Models\VideoReview::factory(100)->create();
     }
 }

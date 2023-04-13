@@ -21,7 +21,7 @@ class VideoReviewFactory extends Factory
         return [
             'user_id' => User::get()->random()->id,
             'movie_id' => Movie::get()->random()->id,
-            'video' => 'storage/review-video/test.mp4',
+            'video' => 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
             'source' => 0
         ];
     }
