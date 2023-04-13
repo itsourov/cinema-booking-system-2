@@ -20,6 +20,7 @@ if .env file doesn’t exist in the root directory run this command
 then 
 ```bash
   php artisan serve
+  npm install
   npm run dev
 ```
 populate database with dummy data and default users
