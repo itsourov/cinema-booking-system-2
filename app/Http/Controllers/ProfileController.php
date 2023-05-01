@@ -36,7 +36,7 @@ class ProfileController extends Controller
 
         if ($temporaryFile) {
 
-            $request->user()->addMedia(storage_path('app/public/temp/profile/' . $request->profileImage . '/' . $temporaryFile->filename))
+            $request->user()->addMedia(storage_path('app/public/temp/' . $request->profileImage . '/' . $temporaryFile->filename))
 
                 ->toMediaCollection('profileImages', 'profile-image');
             Storage::deleteDirectory('public/temp/profile/' . $request->profileImage);
