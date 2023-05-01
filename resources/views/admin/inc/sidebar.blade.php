@@ -82,6 +82,17 @@
                         </x-slot>
 
                     </x-admin.sidebar-menu-item>
+                    <x-admin.sidebar-menu-item :href="route('admin.tickets.index')" :active="request()->routeIs('admin.tickets.index')">
+
+                        <x-slot name="icon">
+                            <x-ri-ticket-2-line />
+                        </x-slot>
+                        <x-slot name="title">
+                            {{ __('Tickets') }}
+                        </x-slot>
+
+
+                    </x-admin.sidebar-menu-item>
                     <x-admin.sidebar-menu-item :active="request()->routeIs('admin.foods*')" :dropdown="true">
 
                         <x-slot name="icon">

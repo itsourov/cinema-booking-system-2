@@ -10,11 +10,11 @@ use App\Http\Requests\UpdateShowRequest;
 class ShowController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the show.
      */
     public function index()
     {
-        $dateTime =  Carbon::now()->toDateTimeString();
+        $dateTime = Carbon::now()->toDateTimeString();
 
         $shows = Show::upcoming()->with('movie')->paginate(10);
 
@@ -25,7 +25,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new show.
      */
     public function create()
     {
@@ -33,7 +33,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created show in storage.
      */
     public function store(StoreShowRequest $request)
     {
@@ -41,12 +41,12 @@ class ShowController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified show.
      */
     public function show(Show $show)
     {
 
-        $dateTime =  Carbon::now()->toDateTimeString();
+        $dateTime = Carbon::now()->toDateTimeString();
         return view('shows.details', [
             'show' => $show,
             'dateTime' => $dateTime,
@@ -54,7 +54,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified show.
      */
     public function edit(Show $show)
     {
@@ -62,7 +62,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified show in storage.
      */
     public function update(UpdateShowRequest $request, Show $show)
     {
@@ -70,7 +70,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified show from storage.
      */
     public function destroy(Show $show)
     {

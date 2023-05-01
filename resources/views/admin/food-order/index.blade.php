@@ -48,7 +48,7 @@
                     </div>
                     <div class="text-center mt-5">
                         @if ($order->payment_status != 'paid')
-                            <form action="{{ route('food-order.update', $order->id) }}" method="post" class="inline">
+                            <form action="{{ route('admin.fo.update', $order->id) }}" method="post" class="inline">
                                 @method('PUT')
                                 @csrf
                                 <input type="hidden" name="payment_status" value="paid">
@@ -61,7 +61,7 @@
                                 <x-button.danger>Delete Order</x-button.danger>
                             </form>
                         @else
-                            <form action="{{ route('food-order.update', $order->id) }}" method="post" class="inline">
+                            <form action="{{ route('admin.fo.update', $order->id) }}" method="post" class="inline">
                                 @method('PUT')
                                 @csrf
                                 <input type="hidden" name="payment_status" value="unpaid">

@@ -39,7 +39,7 @@ class ProfileController extends Controller
             $request->user()->addMedia(storage_path('app/public/temp/profile/' . $request->profileImage . '/' . $temporaryFile->filename))
 
                 ->toMediaCollection('profileImages', 'profile-image');
-            Storage::deleteDirectory('public/temp/profile/' .  $request->profileImage);
+            Storage::deleteDirectory('public/temp/profile/' . $request->profileImage);
             $temporaryFile->delete();
         }
 
@@ -52,6 +52,9 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request)
     {
+
+        //this checks if a user has password or not because i was planning to setup password-less social login(google login)
+        // but to make the google login public google requires a varification. thats why i commented out the social login part. anyway this will still work
         if ($request->user()->password) {
             $request->validateWithBag('userDeletion', [
                 'password' => ['required', 'current-password'],

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 class StripeController extends Controller
 {
+
+    //this will initiate the stripe payment for ticket, create a session and redirect to the stripe payment page
     public function ticketPayemtn(Request $request, Ticket $ticket)
     {
 
@@ -54,6 +56,8 @@ class StripeController extends Controller
 
     }
 
+
+    //this function will run after ticket payment is succesful
     public function successTicket(Request $request)
     {
         $stripe = new \Stripe\StripeClient(config('services.stripe.skey'));
@@ -110,6 +114,9 @@ class StripeController extends Controller
         }
     }
 
+
+    //this will initiate the stripe payment for food order, create a session and redirect to the stripe payment page
+
     public function FoodOrderpayment(Request $request, FoodOrder $foodOrder)
     {
 
@@ -146,6 +153,8 @@ class StripeController extends Controller
         return redirect($checkout_session->url);
     }
 
+
+    //this function will run after food payment is succesful
     public function successFoodOrder(Request $request)
     {
         $stripe = new \Stripe\StripeClient(config('services.stripe.skey'));

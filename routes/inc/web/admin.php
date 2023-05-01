@@ -3,6 +3,7 @@
 
 
 
+use App\Http\Controllers\Admin\TicketController;
 use UniSharp\LaravelFilemanager\Lfm;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\FoodController;
@@ -41,6 +42,11 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/{show}/preview', [ShowController::class, 'show'])->name('admin.shows.show');
         Route::put('/{show}', [ShowController::class, 'update'])->name('admin.shows.update');
         Route::delete('/{show}', [ShowController::class, 'destroy'])->name('admin.shows.delete');
+    });
+    Route::prefix('tickets')->group(function () {
+        Route::get('/', [TicketController::class, 'index'])->name('admin.tickets.index');
+        Route::get('/{ticket}', [TicketController::class, 'edit'])->name('admin.tickets.edit');
+        Route::put('/{ticket}', [TicketController::class, 'update'])->name('admin.tickets.update');
     });
     Route::prefix('foods')->group(function () {
         Route::get('/', [FoodController::class, 'index'])->name('admin.foods.index');

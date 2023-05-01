@@ -8,6 +8,8 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+    // display profile info with ediable form
     public function index(): View
     {
         return view('admin.profile.index', [

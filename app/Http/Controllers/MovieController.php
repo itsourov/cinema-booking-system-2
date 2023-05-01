@@ -9,7 +9,7 @@ use App\Models\Movie;
 class MovieController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the movie.
      */
     public function index()
     {
@@ -23,7 +23,7 @@ class MovieController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new movie.
      */
     public function create()
     {
@@ -31,7 +31,7 @@ class MovieController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created movie in storage.
      */
     public function store(StoreMovieRequest $request)
     {
@@ -39,7 +39,7 @@ class MovieController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified movie.
      */
     public function show(Movie $movie)
     {
@@ -50,10 +50,10 @@ class MovieController extends Controller
                 $query->upcoming();
             }
         ])->loadCount([
-            'shows' => function ($query) {
-                $query->upcoming();
-            }
-        ]);
+                'shows' => function ($query) {
+                    $query->upcoming();
+                }
+            ]);
         if (auth()->user()) {
             $userWatchedThisMovie = in_array($movie->id, auth()->user()->movies->pluck('id')->toArray());
         } else {
@@ -68,7 +68,7 @@ class MovieController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified movie.
      */
     public function edit(Movie $movie)
     {
@@ -76,7 +76,7 @@ class MovieController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified movie in storage.
      */
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
@@ -84,7 +84,7 @@ class MovieController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified movie from storage.
      */
     public function destroy(Movie $movie)
     {

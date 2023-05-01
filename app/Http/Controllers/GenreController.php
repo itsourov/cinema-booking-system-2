@@ -9,7 +9,7 @@ use App\Models\Genre;
 class GenreController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the genre.
      */
     public function index()
     {
@@ -17,7 +17,7 @@ class GenreController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new genre.
      */
     public function create()
     {
@@ -25,7 +25,7 @@ class GenreController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created genre in storage.
      */
     public function store(StoreGenreRequest $request)
     {
@@ -33,7 +33,7 @@ class GenreController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified genre.
      */
     public function show(Genre $genre)
     {
@@ -41,7 +41,7 @@ class GenreController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified genre.
      */
     public function edit(Genre $genre)
     {
@@ -49,7 +49,7 @@ class GenreController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified genre in storage.
      */
     public function update(UpdateGenreRequest $request, Genre $genre)
     {
@@ -57,7 +57,7 @@ class GenreController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified genre from storage.
      */
     public function destroy(Genre $genre)
     {

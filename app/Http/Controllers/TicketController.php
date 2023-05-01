@@ -14,7 +14,7 @@ use App\Http\Requests\UpdateTicketRequest;
 class TicketController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the ticket.
      */
     public function index()
     {
@@ -27,7 +27,7 @@ class TicketController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new ticket.
      */
     public function create()
     {
@@ -35,7 +35,7 @@ class TicketController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created ticket in storage.
      */
     public function store(StoreTicketRequest $request)
     {
@@ -43,7 +43,7 @@ class TicketController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified ticket.
      */
     public function show(Ticket $ticket)
     {
@@ -69,14 +69,14 @@ class TicketController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified ticket.
      */
     public function edit(Ticket $ticket)
     {
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified ticket in storage.
      */
     public function cancel(Request $request, Ticket $ticket)
     {
@@ -119,7 +119,7 @@ class TicketController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified ticket from storage.
      */
     public function destroy(Ticket $ticket)
     {

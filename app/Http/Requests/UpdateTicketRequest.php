@@ -23,6 +23,7 @@ class UpdateTicketRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'paid_amount' => ['required', 'string', 'max:255'],
             'payment_status' => ['required', 'string', 'max:255'],
         ];
     }

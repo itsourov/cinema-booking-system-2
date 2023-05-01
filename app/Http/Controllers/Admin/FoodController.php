@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class FoodController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the foods.
      */
     public function index()
     {
@@ -23,13 +23,17 @@ class FoodController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new food.
      */
     public function create()
     {
 
         return view('admin.foods.create');
     }
+
+    /**
+     * process request from create form and then create a new food item
+     */
     public function store(Request $request)
     {
 
@@ -44,7 +48,9 @@ class FoodController extends Controller
         return redirect(route('admin.foods.index'))->with('message', 'Food Created');
     }
 
-
+    /**
+     * Show the form for editing a existing food.
+     */
     public function edit(Food $food)
     {
 
@@ -52,6 +58,10 @@ class FoodController extends Controller
             'food' => $food,
         ]);
     }
+
+    /**
+     * process request from edit form and then update the info
+     */
     public function update(Food $food, Request $request)
     {
         $validated = $request->validate([
@@ -64,8 +74,9 @@ class FoodController extends Controller
         $food->update($validated);
         return redirect(route('admin.foods.index'))->with('message', 'Food Created');
     }
+
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified food from storage.
      */
     public function destroy(Food $food)
     {

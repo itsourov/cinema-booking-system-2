@@ -30,7 +30,9 @@
                         @csrf
 
                         <x-button.primary>Make Payment (stripe)</x-button.primary>
+
                     </form>
+
                     <form action="{{ route('ticket.delete', $ticket->id) }}" method="post">
                         @method('DELETE')
                         @csrf
@@ -68,7 +70,11 @@
 
 
         </x-card>
-
+        <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+            role="alert">
+            <span class="font-medium">Info alert!</span> 4242 4242 4242 4242 is the test card for stripe. this is the
+            card number and cvv and expiry can be anything
+        </div>
     </div>
 
 

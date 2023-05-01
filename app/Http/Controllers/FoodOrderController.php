@@ -10,7 +10,7 @@ use App\Http\Requests\UpdateFoodOrderRequest;
 class FoodOrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the food-order.
      */
     public function index()
     {
@@ -21,7 +21,7 @@ class FoodOrderController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new food-order.
      */
     public function create()
     {
@@ -29,7 +29,7 @@ class FoodOrderController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created food-order in storage.
      */
     public function store(StoreFoodOrderRequest $request)
     {
@@ -37,7 +37,7 @@ class FoodOrderController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified food-order.
      */
     public function show(FoodOrder $foodOrder)
     {
@@ -47,7 +47,7 @@ class FoodOrderController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified food-order.
      */
     public function edit(FoodOrder $foodOrder)
     {
@@ -55,7 +55,7 @@ class FoodOrderController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified food-order in storage.
      */
     public function cancel(Request $request, FoodOrder $foodOrder)
     {
@@ -68,7 +68,7 @@ class FoodOrderController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified food-order from storage.
      */
     public function destroy(FoodOrder $foodOrder)
     {

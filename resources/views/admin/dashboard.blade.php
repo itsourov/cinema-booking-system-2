@@ -1,3 +1,5 @@
 <x-admin-layout>
-    as
+    <div class="p-4">
+        Admin Dashboard
+    </div>
 </x-admin-layout>

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class UploadController extends Controller
 {
 
+    //store temporary file
     public function store(Request $request)
     {
         Debugbar::disable();
@@ -55,10 +56,11 @@ class UploadController extends Controller
         return 'unvalidated file recieved';
     }
 
+    //delete temporary file
     public function destroy(Request $request)
     {
         $fileId = request()->getContent();
-        $temporaryFile =    TemporaryFile::where('folder', $fileId)->first();
+        $temporaryFile = TemporaryFile::where('folder', $fileId)->first();
         $temporaryFile->delete();
         return Storage::deleteDirectory('public/temp/' . $fileId);
     }

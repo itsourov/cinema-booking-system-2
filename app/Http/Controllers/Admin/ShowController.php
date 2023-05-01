@@ -14,14 +14,14 @@ use App\Http\Requests\UpdateShowRequest;
 class ShowController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the show.
      */
     public function index()
     {
         $shows = Show::with('movie')->latest()->paginate(10);
 
 
-        $dateTime =  Carbon::now()->toDateTimeString();
+        $dateTime = Carbon::now()->toDateTimeString();
 
         return view('admin.shows.index', [
             'shows' => $shows,
@@ -29,13 +29,13 @@ class ShowController extends Controller
         ]);
     }
     /**
-     * Display a listing of the resource.
+     * Display a listing of the show.
      */
     public function upcoming()
     {
         $shows = Show::with('movie')->upcoming()->paginate(10);
 
-        $dateTime =  Carbon::now()->toDateTimeString();
+        $dateTime = Carbon::now()->toDateTimeString();
 
         return view('admin.shows.index', [
             'shows' => $shows,
@@ -44,7 +44,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new show.
      */
     public function create(Movie $movie)
     {
@@ -65,7 +65,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created show in storage.
      */
     public function store(StoreShowRequest $request, Movie $movie)
     {
@@ -74,13 +74,13 @@ class ShowController extends Controller
 
 
 
-        $seats =  new stdClass();
+        $seats = new stdClass();
         foreach (range('A', 'H') as $v) {
-            $row =  new stdClass();
+            $row = new stdClass();
 
             for ($j = 0; $j < 8; $j++) {
-                $status = ['booked', 'available',  'blocked', 'available'];
-                $seat =  new stdClass();
+                $status = ['booked', 'available', 'blocked', 'available'];
+                $seat = new stdClass();
                 // $seat->status = $status[rand(0, 3)];
                 $seat->status = 'available';
                 $seat->price = $request->ticket_price;
@@ -89,7 +89,7 @@ class ShowController extends Controller
             }
             $seats->$v = $row;
         }
-        $show =  Show::create(array_merge($request->validated(), ['movie_id' => $movie->id, 'seat' => json_encode($seats)]));
+        $show = Show::create(array_merge($request->validated(), ['movie_id' => $movie->id, 'seat' => json_encode($seats)]));
 
 
 
@@ -97,7 +97,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified show.
      */
     public function show(Show $show)
     {
@@ -109,7 +109,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified show.
      */
     public function edit(Show $show)
     {
@@ -121,7 +121,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified show in storage.
      */
     public function update(UpdateShowRequest $request, Show $show)
     {
@@ -134,7 +134,7 @@ class ShowController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified show from storage.
      */
     public function destroy(Show $show)
     {

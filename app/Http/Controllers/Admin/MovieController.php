@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 class MovieController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the movie.
      */
     public function index()
     {
@@ -26,7 +26,7 @@ class MovieController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new movie.
      */
     public function create()
     {
@@ -37,24 +37,24 @@ class MovieController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created movie in storage.
      */
     public function store(StoreMovieRequest $request)
     {
-        $movie =  Movie::create($request->validated());
+        $movie = Movie::create($request->validated());
         $movie->genres()->sync($request->genres);
         return redirect(route('admin.movies'))->with('message', 'Movie submitted');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified movie.
      */
     public function show(Movie $movie)
     {
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified movie.
      */
     public function edit(Movie $movie)
     {
@@ -66,7 +66,7 @@ class MovieController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified movie in storage.
      */
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
@@ -78,7 +78,7 @@ class MovieController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified movie from storage.
      */
     public function destroy(Movie $movie)
     {

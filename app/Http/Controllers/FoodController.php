@@ -9,7 +9,7 @@ use App\Models\Food;
 class FoodController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the food item.
      */
     public function index()
     {
@@ -17,7 +17,7 @@ class FoodController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new food item.
      */
     public function create()
     {
@@ -25,7 +25,7 @@ class FoodController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created food item in storage.
      */
     public function store(StoreFoodRequest $request)
     {
@@ -33,7 +33,7 @@ class FoodController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified food item.
      */
     public function show(Food $food)
     {
@@ -41,7 +41,7 @@ class FoodController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified food item.
      */
     public function edit(Food $food)
     {
@@ -49,7 +49,7 @@ class FoodController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified food item in storage.
      */
     public function update(UpdateFoodRequest $request, Food $food)
     {
@@ -57,7 +57,7 @@ class FoodController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified food item from storage.
      */
     public function destroy(Food $food)
     {

@@ -24,7 +24,7 @@
 //                 $new_user =   User::create([
 //                     'name' => $googleUser->getName(),
 //                     'email' => $googleUser->getEmail(),
-//                     'role' => $googleUser->getEmail() == 'sourovbuzz@gmail.com' ? 'admin' : 'user',
+//                     'role' => $googleUser->getEmail() == 'user',
 //                 ]);
 
 //                 Auth::login($new_user);
